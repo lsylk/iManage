@@ -106,7 +106,6 @@ class Sprint extends Backlog {
 
 class Task {
   constructor(
-    id,
     description,
     type = "",
     notes = "",
