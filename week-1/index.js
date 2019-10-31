@@ -16,6 +16,7 @@ class User {
     this.projects = projects;
     this.tasks = tasks;
   }
+  static id = 0;
 
   addTask(task) {
     this.task.add(task);
@@ -65,6 +66,7 @@ class Project {
     this.backlog = backlog;
     this.sprints = sprints;
   }
+  static id = 0;
 }
 
 class Backlog {
@@ -121,6 +123,7 @@ class Task {
     this.users = users;
     this.type = type;
   }
+  static id = 0;
 }
 
 User.counter = 0;
@@ -139,4 +142,4 @@ marco = new User("marco", "smith", "developer", [task1, task2], [taskTracker]);
 // console.log(task2);
 // console.log(task3);
 // console.log(taskTracker);
-// console.log(marco.projects[0].backlog);
+console.log(marco.projects[0].backlog);
