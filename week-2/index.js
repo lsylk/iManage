@@ -36,5 +36,10 @@ const Database = require("./database");
 const loadedUser = Database.load('data/user.json');
 const loadedTaskTracker = Database.load('data/taskTracker.json');
 
-console.log(loadedUser.projects.backlog);
-console.log(loadedTaskTracker.tasks);
+/*
+    NOTE: 
+    when getting [ [Object], [Object], [Object] ]
+    use JSON.stringify to be able to see the deeply nested objects in the console.
+ */
+console.log(JSON.stringify(loadedUser, null, 2));
+console.log(JSON.stringify(loadedTaskTracker, null, 2));
