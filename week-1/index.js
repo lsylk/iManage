@@ -8,8 +8,8 @@
 */
 
 class User {
-  constructor(id, name, surname, position, tasks = [], projects = []) {
-    this.id = id;
+  constructor(name, surname, position, tasks = [], projects = []) {
+    this.id = User.counter++;
     this.name = name;
     this.surname = surname;
     this.position = position;
@@ -59,8 +59,8 @@ class User {
 }
 
 class Project {
-  constructor(id, name, backlog = [], sprints = []) {
-    this.id = id;
+  constructor(name, backlog = [], sprints = []) {
+    this.id = Project.counter++
     this.name = name;
     this.backlog = backlog;
     this.sprints = sprints;
@@ -114,7 +114,7 @@ class Task {
     users = [],
     status = "new"
   ) {
-    this.id = id;
+    this.id = Task.counter++;
     this.description = description;
     this.status = status;
     this.notes = notes;
@@ -124,14 +124,17 @@ class Task {
   }
 }
 
-task1 = new Task(1, "Create Classes and Methods", "feature");
-task2 = new Task(2, "Separate Classes into different files", "feature");
-task3 = new Task(3, "Review Classes", "review");
+User.counter = 0;
+Project.counter = 0;
+Task.counter = 0;
+task1 = new Task("Create Classes and Methods", "feature");
+task2 = new Task("Separate Classes into different files", "feature");
+task3 = new Task("Review Classes", "review");
 
 taskTrackerBacklog = new Backlog([task1, task2, task3])
-taskTracker = new Project(1, "Task Tracker", taskTrackerBacklog);
+taskTracker = new Project("Task Tracker", taskTrackerBacklog);
 
-marco = new User(1, "marco", "smith", "developer", [task1, task2], [taskTracker]);
+marco = new User("marco", "smith", "developer", [task1, task2], [taskTracker]);
 
 // console.log(task1);
 // console.log(task2);
