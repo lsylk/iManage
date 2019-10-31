@@ -16,7 +16,7 @@ class User {
     this.projects = projects;
     this.tasks = tasks;
   }
-  static id = 0;
+  static counter = 0;
 
   addTask(task) {
     this.task.add(task);
@@ -66,7 +66,7 @@ class Project {
     this.backlog = backlog;
     this.sprints = sprints;
   }
-  static id = 0;
+  static counter = 0;
 }
 
 class Backlog {
@@ -123,7 +123,7 @@ class Task {
     this.users = users;
     this.type = type;
   }
-  static id = 0;
+  static counter = 0;
 }
 
 User.counter = 0;
