@@ -1,11 +1,11 @@
 module.exports = class User {
-  constructor(name, surname, position, tasks = [], projects = []) {
-    this.id = User.counter++;
+  constructor(name, surname, position, tasks = [], projects = [], id = undefined) {
     this.name = name;
     this.surname = surname;
     this.position = position;
     this.projects = projects;
     this.tasks = tasks;
+    this.id = id || User.counter++;
   }
   static counter = 0;
 
@@ -44,7 +44,7 @@ module.exports = class User {
     );
   }
 
-  static create({ name, surname, position, tasks, projects }) {
-    return new User(name, surname, position, tasks, projects);
+  static create({ name, surname, position, tasks, projects, id}) {
+    return new User(name, surname, position, tasks, projects, id);
   }
 };

@@ -5,9 +5,10 @@ module.exports = class Task {
     notes = "",
     comments,
     users = [],
-    status = "new"
+    status = "new",
+    id = undefined,
   ) {
-    this.id = Task.counter++;
+    this.id =  id || Task.counter++;
     this.description = description;
     this.status = status;
     this.notes = notes;
@@ -17,7 +18,7 @@ module.exports = class Task {
   }
   static counter = 0;
 
-  static create({ description, type, notes, comments, users, status }) {
-    return new Task(description, type, notes, comments, users, status);
+  static create({  description, type, notes, comments, users, status, id, }) {
+    return new Task( description, type, notes, comments, users, status, id,);
   }
 };

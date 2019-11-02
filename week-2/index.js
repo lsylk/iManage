@@ -10,10 +10,6 @@ const Database = require("./database");
 
 /*
 // INSTANTIATED a User, Tasks, Backlog and User 
-    User.counter = 0;
-    Project.counter = 0;
-    Task.counter = 0;
-
     task1 = new Task("Create Classes and Methods", "feature");
     task2 = new Task("Separate Classes into different files", "feature");
     task3 = new Task("Review Classes", "review");
