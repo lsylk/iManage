@@ -16,10 +16,6 @@ module.exports = class Backlog {
   }
 
   delete(task) {
-    this.tasks.forEach(existingTask => {
-      if (existingTask.id === task.id) {
-        this.tasks.delete(task);
-      }
-    });
+    this.tasks = this.tasks.filter(existingTask => existingTask.id !== task.id);
   }
 };

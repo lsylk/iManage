@@ -19,7 +19,8 @@ class User {
   static counter = 0;
 
   addTask(task) {
-    this.task.add(task);
+    this.tasks.push(task);
+    task.users.push(this);
   }
 
   updateTask(task) {
@@ -31,11 +32,7 @@ class User {
   }
 
   deleteTask(task) {
-    this.tasks.forEach(existingTask => {
-      if (existingTask.id === task.id) {
-        this.tasks.delete(task);
-      }
-    });
+    this.tasks = this.tasks.filter(existingTask => existingTask.id !== task.id);
   }
 
   addProject(project) {
@@ -43,7 +40,7 @@ class User {
   }
 
   updateProject(project) {
-    this.projects.forEach(existingProjects => {
+    this.projects = this.projects.forEach(existingProjects => {
       if (existingProjects.id === project.id) {
         existingProjects = project;
       }
@@ -51,17 +48,15 @@ class User {
   }
 
   deleteProject(project) {
-    this.projects.forEach(existingProjects => {
-      if (existingProjects.id === project.id) {
-        this.projects.delete(project);
-      }
-    });
+    this.projects = this.projects.filter(
+      existingProject => existingProject.id !== project.id
+    );
   }
 }
 
 class Project {
   constructor(name, backlog = [], sprints = []) {
-    this.id = Project.counter++
+    this.id = Project.counter++;
     this.name = name;
     this.backlog = backlog;
     this.sprints = sprints;
@@ -87,11 +82,7 @@ class Backlog {
   }
 
   delete(task) {
-    this.tasks.forEach(existingTask => {
-      if (existingTask.id === task.id) {
-        this.tasks.delete(task);
-      }
-    });
+    this.tasks = this.tasks.filter(existingTask => existingTask.id !== task.id);
   }
 }
 
@@ -133,7 +124,7 @@ task1 = new Task("Create Classes and Methods", "feature");
 task2 = new Task("Separate Classes into different files", "feature");
 task3 = new Task("Review Classes", "review");
 
-taskTrackerBacklog = new Backlog([task1, task2, task3])
+taskTrackerBacklog = new Backlog([task1, task2, task3]);
 taskTracker = new Project("Task Tracker", taskTrackerBacklog);
 
 marco = new User("marco", "smith", "developer", [task1, task2], [taskTracker]);
@@ -142,4 +133,6 @@ marco = new User("marco", "smith", "developer", [task1, task2], [taskTracker]);
 // console.log(task2);
 // console.log(task3);
 // console.log(taskTracker);
-console.log(marco.projects[0].backlog);
+// console.log(marco);
+
+

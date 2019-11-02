@@ -9,9 +9,9 @@ module.exports = class User {
   }
   static counter = 0;
 
-
   addTask(task) {
-    this.task.add(task);
+    this.tasks.push(task);
+    task.users.push(this);
   }
 
   updateTask(task) {
@@ -23,11 +23,7 @@ module.exports = class User {
   }
 
   deleteTask(task) {
-    this.tasks.forEach(existingTask => {
-      if (existingTask.id === task.id) {
-        this.tasks.delete(task);
-      }
-    });
+    this.tasks = this.tasks.filter(existingTask => existingTask.id !== task.id);
   }
 
   addProject(project) {
@@ -35,7 +31,7 @@ module.exports = class User {
   }
 
   updateProject(project) {
-    this.projects.forEach(existingProjects => {
+    this.projects = this.projects.forEach(existingProjects => {
       if (existingProjects.id === project.id) {
         existingProjects = project;
       }
@@ -43,10 +39,8 @@ module.exports = class User {
   }
 
   deleteProject(project) {
-    this.projects.forEach(existingProjects => {
-      if (existingProjects.id === project.id) {
-        this.projects.delete(project);
-      }
-    });
+    this.projects = this.projects.filter(
+      existingProject => existingProject.id !== project.id
+    );
   }
 };
