@@ -76,7 +76,7 @@ app.post('/project/:projectId/sprint/:sprintId/task', async (req, res) => {
   res.send(task);
 })
 
-app.put('user/:userId', async(req, res) => {
+app.put('/user/:userId', async(req, res) => {
   const userId = req.params.userId;
  
   res.send(user)
@@ -95,12 +95,11 @@ app.put('/sprint/:sprintId', async(req, res) => {
   res.send(user)
 })
 
-app.put('user/:userId/tasks/:taskId', async(req, res) => {
+app.put('/user/:userId/tasks/:taskId', async(req, res) => {
   const taskId = req.params.taskId;
  
   res.send(user)
 })
-
 // -----
 
 app.delete('/user/:userId', async (req, res) => {
@@ -123,17 +122,17 @@ app.delete('/sprint/:sprintId', async (req, res) => {
   res.send(sprint)
 })
 
-app.delete('userId/:userId/task/:taskId', async (req, res) => {
+app.delete('/user/:userId/task/:taskId', async (req, res) => {
   const project = await TaskService.del(req.params.taskId)
   res.send(project)
 })
 
-app.delete('projectId/:projectId/backlog/task/:taskId', async (req, res) => {
+app.delete('/project/:projectId/backlog/task/:taskId', async (req, res) => {
   const project = await TaskService.del(req.params.taskId)
   res.send(project)
 })
 
-app.delete('sprintId/:sprintId/task/:taskId', async (req, res) => {
+app.delete('/sprint/:sprintId/task/:taskId', async (req, res) => {
   const project = await TaskService.del(req.params.taskId)
   res.send(project)
 })
