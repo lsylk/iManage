@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const UserService = require("./../services/user-service");
-const TaskService = require("./../services/task-service");
+const UserService = require("../services/user-service");
+const TaskService = require("../services/task-service");
 
 router.get("/user/:userId/", async (req, res) => {
   const userId = req.params.userId;
