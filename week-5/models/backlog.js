@@ -1,25 +1,20 @@
-module.exports = class Backlog {
-  constructor(tasks) {
-    this.tasks = tasks;
-  }
+const mongoose = require("mongoose");
 
-  add(task) {
-    this.tasks.add(task);
-  }
+const BacklogSchema = new mongoose.Schema({
 
-  update(task) {
-    this.tasks.forEach(existingTask => {
-      if (existingTask.id === task.id) {
-        existingTask = task;
+  tasks: [
+    {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "Task",
+      autopopulate: {
+        maxDepth: 1
       }
-    });
-  }
+    }
+  ]
+});
 
-  delete(task) {
-    this.tasks = this.tasks.filter(existingTask => existingTask.id !== task.id);
-  }
+BacklogSchema.plugin(require("mongoose-autopopulate"));
 
-  static create({ tasks }) {
-    return new Backlog(tasks);
-  }
-};
+const BacklogModel = mongoose.model("Backlog", BacklogSchema);
+
+module.exports = BacklogModel;

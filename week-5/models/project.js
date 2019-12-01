@@ -1,14 +1,30 @@
-module.exports = class Project {
-  constructor(name, backlog = [], sprints = [], id = undefined) {
-    this.name = name;
-    this.backlog = backlog;
-    this.sprints = sprints;
-    this.id = id || Project.counter++;
-  }
+const mongoose = require("mongoose");
 
-  static counter = 0;
+const ProjectSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  backlog: {
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: "Backlog",
+    autopopulate: {
+      maxDepth: 1
+    }
+  },
+  sprints: [
+    {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "Sprint",
+      autopopulate: {
+        maxDepth: 1
+      }
+    }
+  ]
+});
 
-  static create({ name, backlog, sprints, id }) {
-    return new Project(name, backlog, sprints, id);
-  }
-};
+ProjectSchema.plugin(require("mongoose-autopopulate"));
+
+const ProjectModel = mongoose.model("Project", ProjectSchema);
+
+module.exports = ProjectModel;

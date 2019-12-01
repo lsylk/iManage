@@ -1,16 +1,20 @@
-const Backlog = require("./backlog");
+const mongoose = require("mongoose");
 
-module.exports = class Sprint extends Backlog {
-  constructor(deadline, tasks) {
-    this.deadline = deadline;
-    this.tasks = tasks;
-  }
+const SprintSchema = new mongoose.Schema({
+  deadline: { type: Date, required: true },
+  tasks: [
+    {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "Task",
+      autopopulate: {
+        maxDepth: 1
+      }
+    }
+  ]
+});
 
-  updateDeadline(deadline) {
-    this.deadline = deadline;
-  }
+SprintSchema.plugin(require("mongoose-autopopulate"));
 
-  static create({ deadline, tasks }) {
-    return new Sprint(deadline, tasks);
-  }
-};
+const SprintModel = mongoose.model("Sprint", SprintSchema);
+
+module.exports = SprintModel;
