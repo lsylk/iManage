@@ -2,9 +2,15 @@ const BaseService = require("./base-service");
 const SprintModel = require("../models/sprint");
 
 class SprintService extends BaseService {
-  constructor() {
-    super(SprintModel, `${__dirname}/../data/sprint-database.json`);
+  model = SprintModel;
+
+  async cleanSprint(sprint) {
+    sprint.tasks = [];
+    return sprint.save();
   }
 }
+
+SprintService.prototype.addTask = BaseService.addEntity("tasks");
+SprintService.prototype.deleteTask = BaseService.deleteEntity("tasks");
 
 module.exports = new SprintService();
