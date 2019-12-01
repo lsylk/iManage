@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const SprintSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
   deadline: { type: Date, required: true },
   tasks: [
     {
