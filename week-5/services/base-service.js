@@ -3,7 +3,7 @@ module.exports = class Service {
     return this.model.find();
   }
 
-  async add(item) {
+  async create(item) {
     return this.model.create(item);
   }
 
