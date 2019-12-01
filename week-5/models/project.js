@@ -5,6 +5,15 @@ const ProjectSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  users: [
+    {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "User",
+      autopopulate: {
+        maxDepth: 1
+      }
+    }
+  ],
   backlog: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: "Backlog",
