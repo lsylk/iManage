@@ -63,6 +63,7 @@ test("Create new project", async t => {
   const res = await request(app)
     .post("/project")
     .send(projectToCreate);
+
   t.is(res.status, 200);
   t.is(res.body.name, projectToCreate.name);
   t.true(res.body.users.length === 0);
@@ -80,6 +81,7 @@ test("Create new sprint for a project", async t => {
   const sprint = await request(app)
     .post(`/project/${project._id}/sprint`)
     .send(sprintToCreate);
+    
   t.is(sprint.status, 200);
   t.is(sprint.body.name, sprintToCreate.name);
   t.is(sprint.body.deadline, sprintToCreate.deadline.toISOString());
@@ -114,7 +116,6 @@ test("Update project", async t => {
       .send(projectToCreate)
   ).body;
   const updatedProject = { name: "Project Management Tool 2.0" };
-
   const res = await request(app)
     .put(`/project/${project._id}`)
     .send(updatedProject);
@@ -147,10 +148,10 @@ test("Clear project's backlog", async t => {
   const task = await request(app)
     .post(`/project/${project._id}/backlog/task`)
     .send(taskToCreate);
-
   const cleanBacklog = await request(app)
     .delete(`/project/${project._id}/backlog`)
     .send(project);
+
   t.is(cleanBacklog.status, 200);
   t.true(project.backlog.tasks.length === 0);
 });
@@ -165,15 +166,14 @@ test("Delete task from project's backlog", async t => {
   const task1 = await request(app)
     .post(`/project/${project._id}/backlog/task`)
     .send(taskToCreate);
-
   const task2 = await request(app)
     .post(`/project/${project._id}/backlog/task`)
     .send(taskToCreate2);
-
   const deleteTask2 = await request(app).delete(
     `/project/${project._id}/backlog/task/${task2._id}`
   );
   const getTask2 = await request(app).get(`/task/${task2._id}`);
+
   t.is(deleteTask2.status, 200);
   t.is(getTask2.status, 404);
 });
