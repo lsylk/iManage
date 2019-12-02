@@ -4,7 +4,7 @@ const router = express.Router();
 const TaskService = require("./../services/task-service");
 
 router.get("/:taskId", async (req, res) => {
-  const taskId = req.params.projectId;
+  const taskId = req.params.taskId;
   const task = await TaskService.find(taskId);
   if (!task) res.status(404)
   res.send(task);

@@ -4,12 +4,6 @@ const router = express.Router();
 const UserService = require("../services/user-service");
 const TaskService = require("../services/task-service");
 
-router.get("/show/all", async (req, res) => {
-  const users = await UserService.findAll();
-  if (!users) res.status(404);
-  res.send(users);
-});
-
 router.get("/:userId", async (req, res) => {
   const userId = req.params.userId;
   const user = await UserService.find(userId);
@@ -17,6 +11,11 @@ router.get("/:userId", async (req, res) => {
   res.send(user);
 });
 
+router.get("/show/all", async (req, res) => {
+  const users = await UserService.findAll();
+  if (!users) res.status(404);
+  res.send(users);
+});
 
 router.get("/:userId/projects/all", async (req, res) => {
   const userId = req.params.userId;
@@ -39,7 +38,7 @@ router.post("/", async (req, res) => {
 
 router.post("/:userId/task", async (req, res) => {
   const userId = req.params.userId;
-  const user = UserService.find(userId);
+  const user = await UserService.find(userId);
   if (!user) res.status(404);
   const task = await TaskService.create(req.body);
   await UserService.addTask(user, task);
