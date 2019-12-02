@@ -17,6 +17,24 @@ const projectToCreate = {
   sprints: []
 };
 
+const taskToCreate = {
+  description: "Create Tests for Routes",
+  type: "feature",
+  notes: [],
+  comments: [],
+  users: [],
+  status: "to do"
+};
+
+const taskToCreate2 = {
+  description: "Modity routes",
+  type: "feature",
+  notes: [],
+  comments: [],
+  users: [],
+  status: "to do"
+};
+
 test("Fetch user by id", async t => {
   t.plan(2);
   const user = (
@@ -55,18 +73,27 @@ test("Fetch all users", async t => {
 //   t.deepEqual(res.body.projects, user.projects);
 // });
 
-// test("Fetch all tasks from user", async t => {
-//     t.plan(2);
-//     const user = (
-//       await request(app)
-//         .post("/user")
-//         .send(userToCreate)
-//     ).body;
-//     const res = await request(app).get(`/user/${user._id}/projects/all`);
+test("Fetch all tasks from user", async t => {
+  t.plan(3);
+  const user = (
+    await request(app)
+      .post("/user")
+      .send(userToCreate)
+  ).body;
+  t.is(user.tasks.length, 0);
 
-//     t.is(res.status, 200);
-//     t.deepEqual(res.body.projects, user.projects);
-//   });
+  const task1 = await request(app)
+    .post(`/user/${user._id}/task`)
+    .send(taskToCreate);
+  const task2 = await request(app)
+    .post(`/user/${user._id}/task`)
+    .send(taskToCreate2);
+
+  const res = await request(app).get(`/user/${user._id}`);
+
+  t.is(res.status, 200);
+  t.is(res.body.tasks.length, 2);
+});
 
 // test("Create new user", async t => {
 //   t.plan(6);
@@ -117,3 +144,6 @@ test("Fetch all users", async t => {
 
 //     t.is(res.status, 200);
 //   });
+
+
+//How to connect a project to a user? is the user adding a project or a project adding a user?
