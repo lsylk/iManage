@@ -1,0 +1,7 @@
+extends layout
+
+block content
+    h1 User Tasks
+    p The user has #{tasks.length} tasks to finish.
+    each task in tasks
+        h4 #{task.description}
