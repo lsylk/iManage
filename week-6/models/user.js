@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema({
       type: mongoose.SchemaTypes.ObjectId,
       ref: "Project",
       autopopulate: {
-        maxDepth: 1
+        maxDepth: 0
       }
     }
   ],
