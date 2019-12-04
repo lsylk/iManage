@@ -8,4 +8,7 @@ class UserService extends BaseService {
 UserService.prototype.addTask = BaseService.addEntity("tasks");
 UserService.prototype.deleteTask = BaseService.deleteEntity("tasks");
 
+UserService.prototype.addProject = BaseService.addEntity("projects");
+UserService.prototype.deleteProject = BaseService.deleteEntity("projects");
+
 module.exports = new UserService();
