@@ -89,7 +89,6 @@ test("Add task to sprint", async t => {
   t.is(task.body.status, taskToCreate.status);
 });
 
-//To Do: fix
 test("Delete task from sprint", async t => {
   t.plan(3);
   const project = (
@@ -110,14 +109,11 @@ test("Delete task from sprint", async t => {
   ).body;
   const getSprint = (await request(app).get(`/sprint/${sprint._id}`)).body;
   t.is(getSprint.tasks.length, 1);
-  // console.log(getSprint, 'getSprint');
-
   const deleteTask = await request(app).delete(
     `/sprint/${sprint._id}/task/${task._id}`
   );
   const getSprint2 = await request(app).get(`/sprint/${sprint._id}`);
-  // console.log(deleteTask.body, 'deleteTask');
+  
   t.is(deleteTask.status, 200);
   t.is(getSprint2.body.tasks.length, 0);
-  t.is(deleteTask.body.tasks.length, 0);
 });

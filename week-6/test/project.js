@@ -163,17 +163,17 @@ test("Delete task from project's backlog", async t => {
       .post("/project")
       .send(projectToCreate)
   ).body;
-  const task1 = await request(app)
+  const task1 = (await request(app)
     .post(`/project/${project._id}/backlog/task`)
-    .send(taskToCreate);
-  const task2 = await request(app)
+    .send(taskToCreate)).body;
+  const task2 = (await request(app)
     .post(`/project/${project._id}/backlog/task`)
-    .send(taskToCreate2);
+    .send(taskToCreate2)).body;
   const deleteTask2 = await request(app).delete(
     `/project/${project._id}/backlog/task/${task2._id}`
   );
-  const getTask2 = await request(app).get(`/task/${task2._id}`);
+  const getProject = (await request(app).get(`/project/${project._id}`)).body;
 
   t.is(deleteTask2.status, 200);
-  t.is(getTask2.status, 404);
+  t.is(getProject.backlog.tasks.length, 1);
 });
