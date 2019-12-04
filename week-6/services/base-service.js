@@ -29,7 +29,7 @@ module.exports = class Service {
   static deleteEntity(entityType) {
     return async function deleteEntity(model, entity) {
       const entityIndex = model[entityType].findIndex(entityItem => {
-        return entity._id === entityItem._id;
+        return entity._id.toString() === entityItem._id.toString();
       });
       if (entityIndex >= 0) {
         model[entityType].splice(entityIndex, 1);
