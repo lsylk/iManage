@@ -26,5 +26,8 @@ node_modules
 # nyc
 .nyc_output
 
+# nyc coverage
+coverage
+
 # browserslistrc
 .browserslistrc
