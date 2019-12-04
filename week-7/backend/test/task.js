@@ -19,8 +19,10 @@ const taskToCreate = {
   status: "to do"
 };
 
+const fakeId = '507f1f77bcf86cd799439011';
+
 test("Fetch task by id", async t => {
-  t.plan(8);
+  t.plan(9);
   const user = (
     await request(app)
       .post("/user")
@@ -42,6 +44,9 @@ test("Fetch task by id", async t => {
   t.true(res.body.comments.length === 0);
   t.true(res.body.users.length === 0);
   t.is(res.body.status, task.status);
+
+  const fakeTask = await request(app).get(`/task/${fakeId}`);
+  t.is(fakeTask.status, 404);
 });
 
 test("Update task", async t => {
