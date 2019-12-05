@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span v-for="project in projects" :key="project.id">
+    <span v-for="project in projects" :key="project._id" @click="goToProject(project._id)">
       <ItemCard :item="project" />
     </span>
   </div>
@@ -22,6 +22,9 @@ export default {
   },
   methods: {
     ...mapActions({ fetchProjects: 'project/fetchProjects' }),
+    goToProject(projectId) {
+      this.$router.push({ name: 'project', params: { id: projectId } });
+    },
   },
   created() {
     this.fetchProjects();
