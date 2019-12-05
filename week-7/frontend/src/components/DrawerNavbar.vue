@@ -69,18 +69,12 @@
 </template>
 
 <script>
-import mailImg from './../assets/socialMedia/mail-white-64.png';
-import linkedInImg from './../assets/socialMedia/linkedin-white-32.png';
-import githubImg from './../assets/socialMedia/github-white-32.png';
 import { mapState } from 'vuex';
 
 export default {
   name: 'DrawerNavbar',
   components: {},
   data: () => ({
-    mailImg,
-    linkedInImg,
-    githubImg,
     menuVisible: false,
     page: 'Projects',
   }),
