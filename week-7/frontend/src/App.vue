@@ -1,14 +1,16 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <nav>
       <router-link to="/">Home</router-link> |
-      <router-link :to="{ name: 'user', params: { id: 'abc' } }">User</router-link>
+      <router-link :to="{ name: 'user', params: { id: '123' } }">User</router-link>
       |
-      <router-link :to="{ name: 'project', params: { id: '123' } }">Project</router-link>
+      <router-link :to="{ name: 'project', params: { id: 'abc' } }">Project</router-link>
       |
       <router-link :to="{ name: 'projects' }">Projects</router-link>
-    </div>
-    <router-view />
+    </nav>
+    <transition name="slide">
+      <router-view />
+    </transition>
   </div>
 </template>
 
@@ -21,7 +23,7 @@
   color: #2c3e50;
 }
 
-#nav {
+nav {
   padding: 30px;
 
   a {
