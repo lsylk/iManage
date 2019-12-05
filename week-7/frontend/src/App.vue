@@ -1,18 +1,23 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link :to="{ name: 'user', params: { id: '123' } }">User</router-link>
-      |
-      <router-link :to="{ name: 'project', params: { id: 'abc' } }">Project</router-link>
-      |
-      <router-link :to="{ name: 'projects' }">Projects</router-link>
-    </nav>
-    <transition name="slide">
-      <router-view />
-    </transition>
+  <div>
+    <div id="app">
+      <DrawerNavbar />
+    </div>
+    <AppFooter />
   </div>
 </template>
+
+<script>
+import DrawerNavbar from './components/DrawerNavbar';
+import AppFooter from './components/AppFooter';
+export default {
+  name: 'App',
+  components: {
+    DrawerNavbar,
+    AppFooter,
+  },
+};
+</script>
 
 <style lang="scss">
 #app {
@@ -23,16 +28,17 @@
   color: #2c3e50;
 }
 
-nav {
-  padding: 30px;
+@media (min-height: 723px) {
+  #app {
+    min-height: calc(100vw - 667px);
+    background-color: white;
+  }
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+@media (max-width: 1580px) {
+  #app {
+    min-height: calc(100vh - 30px);
+    background-color: white;
   }
 }
 </style>
