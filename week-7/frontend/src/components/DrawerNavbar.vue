@@ -21,39 +21,23 @@
           </div>
         </md-toolbar>
         <md-list>
-          <md-list-item title="Profile" aria-label="Profile">
+          <md-list-item title="Profile" aria-label="Profile" @click="reRoute('profile')">
             <md-icon>account_circle</md-icon
-            ><span class="md-list-item-text" @click="togglePage('profile')">
-              <router-link :to="{ name: 'user', params: { id: '123' } }"> Profile</router-link>
+            ><span class="md-list-item-text">
+              Profile
             </span>
           </md-list-item>
-
-          <!-- REMOVE after testing start-->
-          <md-list-item title="Project" aria-label="Project">
-            <md-icon>perm_media</md-icon
-            ><span class="md-list-item-text" @click="togglePage('Project')">
-              <router-link :to="{ name: 'project', params: { id: 'abc' } }"> Project</router-link>
-            </span>
+          <md-list-item title="My Tasks" aria-label="My Tasks" @click="reRoute('myTasks')">
+            <md-icon>confirmation_number </md-icon><span class="md-list-item-text"> My Tasks </span>
           </md-list-item>
-          <!-- REMOVE after testing end-->
-
-          <md-list-item title="My Tasks" aria-label="My Tasks">
-            <md-icon>confirmation_number </md-icon
-            ><span class="md-list-item-text" @click="togglePage('myTasks')">
-              <router-link :to="{ name: 'myTasks' }">My Tasks</router-link>
-            </span>
-          </md-list-item>
-          <md-list-item title="My Projects" aria-label="My Projects">
-            <md-icon>folder_shared</md-icon
-            ><span class="md-list-item-text" @click="togglePage('myProjects')">
-              <router-link :to="{ name: 'myProjects' }"> My Projects</router-link>
-            </span>
+          <md-list-item title="My Projects" aria-label="My Projects" @click="reRoute('myProjects')">
+            <md-icon>folder_shared</md-icon><span class="md-list-item-text"> My Projects </span>
             <md-divider class="md-inset"></md-divider>
           </md-list-item>
-          <md-list-item title="Projects" aria-label="Projects">
+          <md-list-item title="Projects" aria-label="Projects" @click="reRoute('Projects')">
             <md-icon>perm_media</md-icon
-            ><span class="md-list-item-text" @click="togglePage('Projects')">
-              <router-link :to="{ name: 'projects' }"> Projects</router-link>
+            ><span class="md-list-item-text">
+              Projects
             </span>
           </md-list-item>
         </md-list>
@@ -80,6 +64,7 @@ export default {
   }),
   computed: {
     ...mapState({
+      user: state => state.user.data,
       project: state => state.project.item,
     }),
     getPersistentType() {
@@ -95,7 +80,24 @@ export default {
         this.page = `${page} :${this.project.name}`;
       }
     },
-    reRoute(routerObject) {
+    reRoute(route) {
+      let routerObject = {};
+      switch (route) {
+      case 'profile':
+        routerObject = { name: 'user', params: { id: '123' } };
+        break;
+      case 'myTasks':
+        routerObject = { name: 'myTasks' };
+        break;
+
+      case 'myProjects':
+        routerObject = { name: 'myProjects' };
+        break;
+
+      case 'Projects':
+        routerObject = { name: 'projects' };
+        break;
+      }
       this.$router.push(routerObject);
     },
   },
