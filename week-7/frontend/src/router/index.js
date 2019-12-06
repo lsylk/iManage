@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
 import User from '../views/User.vue';
+import MyTasks from '../views/MyTasks.vue';
+import MyProjects from '../views/MyProjects.vue';
 import Project from '../views/Project.vue';
 import Projects from '../views/Projects.vue';
 
@@ -9,14 +10,19 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: Home,
-  },
-  {
     path: '/user/:id',
     name: 'user',
     component: User,
+  },
+  {
+    path: '/user/:id/task/my-tasks',
+    name: 'myTasks',
+    component: MyTasks,
+  },
+  {
+    path: '/user/:id/project/my-projects',
+    name: 'myProjects',
+    component: MyProjects,
   },
   {
     path: '/project/:id',
