@@ -20,7 +20,7 @@
       </md-card-area>
       <md-card-actions md-alignment="left" v-if="item.users.length > 0">
         <span v-for="(user, index) in item.users" :key="index">
-          <md-avatar class="md-avatar-icon">{{ formatUserName(user) }}</md-avatar>
+          <md-avatar class="md-avatar-icon md-small">{{ formatUserName(user) }}</md-avatar>
         </span>
       </md-card-actions>
     </md-card>
@@ -34,25 +34,17 @@ export default {
     item: {
       type: Object,
       default: () => ({
-        title: 'Title',
-        subtitle: 'Subtitle',
-        description:
-          'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio itaque ea, nostrum odio. Dolores, sed accusantium quasi non, voluptas eius illo quas, saepe voluptate pariatur in deleniti minus sint. Excepturi.',
-        users: [{ firstName: 'John', lastName: 'Doe' }],
+        title: '',
+        subtitle: '',
+        description: '',
+        users: [{ name: '', surname: '' }],
       }),
     },
   },
   computed: {},
 
   methods: {
-    //   sendMessage () {
-    //     window.alert('Send a message...')
-    //   },
-    //   doACall () {
-    //     window.alert('Calling someone...')
-    //   }
     formatUserName(user) {
-      console.log(user, 'user');
       return `${user.name[0]}${user.surname[0]}`;
     },
   },
