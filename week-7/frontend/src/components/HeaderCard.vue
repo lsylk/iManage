@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-card :class="backlog.name === 'Backlog' ? 'backlog' : 'spring'">
+    <md-card :class="backlog.name === 'Backlog' ? 'backlog' : 'sprint'">
       <md-card-area>
         <md-card-header>
           <div class="md-title">
@@ -10,10 +10,10 @@
 
               <md-menu-content>
                 <md-menu-item title="Add New Spring" aria-label="Add New Spring">
-                  <md-icon>ballot</md-icon> spring</md-menu-item
+                  <md-icon>ballot</md-icon> Add sprint</md-menu-item
                 >
                 <md-menu-item title="Add New Task" aria-label="Add New Task"
-                  ><md-icon>confirmation_number</md-icon> task</md-menu-item
+                  ><md-icon>confirmation_number</md-icon> Add task</md-menu-item
                 >
               </md-menu-content>
             </md-menu>
@@ -45,17 +45,22 @@ export default {
 
 <style lang="scss" scoped>
 .md-card {
-  width: 320px;
+  width: 300px;
   margin: 4px;
   display: inline-block;
   vertical-align: top;
   .md-card-header {
     position: relative;
     margin: 0px;
+    padding: 5px 0px;
     .md-menu {
       position: absolute;
-      top: 14px;
+      top: 10px;
       right: 14px;
+      .md-button {
+        height: 30px;
+        width: 30px;
+      }
     }
     .md-subhead {
       display: flex;
@@ -69,7 +74,7 @@ export default {
   background-color: #b3a5a587 !important;
 }
 
-.spring {
+.sprint {
   background-color: rgba(218, 84, 84, 0.25) !important;
 }
 </style>
