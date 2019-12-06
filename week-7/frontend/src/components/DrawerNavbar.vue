@@ -14,47 +14,47 @@
 
       <md-app-drawer :md-active.sync="menuVisible" :md-persistent="getPersistentType">
         <md-toolbar class="md-transparent" md-elevation="0">
-          <div class="md-toolbar-section-end">
+          <div class="md-toolbar-section-end" aria-label="Menu">
             <md-button class="md-icon-button md-dense" @click="toggleMenu">
               <md-icon>keyboard_arrow_left</md-icon>
             </md-button>
           </div>
         </md-toolbar>
         <md-list>
-          <!-- REMOVE after testing start-->
-          <!-- <md-list-item>
-            <md-icon title="Profile">account_circle</md-icon>
-            <span class="md-list-item-text" @click="togglePage('user')">
-              <router-link :to="{ name: 'user', params: { id: '123' } }">Profile</router-link></span
-            >
+          <md-list-item title="Profile" aria-label="Profile">
+            <md-icon>account_circle</md-icon
+            ><span class="md-list-item-text" @click="togglePage('profile')">
+              <router-link :to="{ name: 'user', params: { id: '123' } }"> Profile</router-link>
+            </span>
           </md-list-item>
 
-          <md-list-item title="Project">
-            <md-icon>perm_media</md-icon>
-            <span class="md-list-item-text" @click="togglePage('Project')">
-              <router-link :to="{ name: 'project', params: { id: 'abc' } }">Project</router-link></span
-            >
-          </md-list-item> -->
+          <!-- REMOVE after testing start-->
+          <md-list-item title="Project" aria-label="Project">
+            <md-icon>perm_media</md-icon
+            ><span class="md-list-item-text" @click="togglePage('Project')">
+              <router-link :to="{ name: 'project', params: { id: 'abc' } }"> Project</router-link>
+            </span>
+          </md-list-item>
           <!-- REMOVE after testing end-->
 
-          <md-list-item title="My Tasks">
-            <md-icon>ballot</md-icon>
-            <span class="md-list-item-text" @click="togglePage('myTasks')">
-              <router-link :to="{ name: '' }">My Tasks</router-link></span
-            >
+          <md-list-item title="My Tasks" aria-label="My Tasks">
+            <md-icon>confirmation_number </md-icon
+            ><span class="md-list-item-text" @click="togglePage('myTasks')">
+              <router-link :to="{ name: 'myTasks' }">My Tasks</router-link>
+            </span>
           </md-list-item>
-          <md-list-item title="My Projects">
-            <md-icon>folder_shared</md-icon>
-            <span class="md-list-item-text" @click="togglePage('myProjects')">
-              <router-link :to="{ name: '' }">My Projects</router-link></span
-            >
+          <md-list-item title="My Projects" aria-label="My Projects">
+            <md-icon>folder_shared</md-icon
+            ><span class="md-list-item-text" @click="togglePage('myProjects')">
+              <router-link :to="{ name: 'myProjects' }"> My Projects</router-link>
+            </span>
             <md-divider class="md-inset"></md-divider>
           </md-list-item>
-          <md-list-item title="Projects">
-            <md-icon>perm_media</md-icon>
-            <span class="md-list-item-text" @click="togglePage('Projects')">
-              <router-link :to="{ name: 'projects' }">Projects</router-link></span
-            >
+          <md-list-item title="Projects" aria-label="Projects">
+            <md-icon>perm_media</md-icon
+            ><span class="md-list-item-text" @click="togglePage('Projects')">
+              <router-link :to="{ name: 'projects' }"> Projects</router-link>
+            </span>
           </md-list-item>
         </md-list>
       </md-app-drawer>
@@ -94,6 +94,9 @@ export default {
       if (page === 'project') {
         this.page = `${page} :${this.project.name}`;
       }
+    },
+    reRoute(routerObject) {
+      this.$router.push(routerObject);
     },
   },
 };
