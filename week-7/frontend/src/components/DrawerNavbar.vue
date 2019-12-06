@@ -64,7 +64,7 @@ export default {
   }),
   computed: {
     ...mapState({
-      user: state => state.user.data,
+      user: state => state.user.item,
       project: state => state.project.item,
     }),
     getPersistentType() {
