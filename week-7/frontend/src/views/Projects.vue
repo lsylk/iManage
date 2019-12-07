@@ -1,11 +1,6 @@
 <template>
   <div class="projects">
-    <div class="project-add-button">
-      <md-button class="md-fab md-plain md-large" @click="addProject()">
-        <md-icon>add</md-icon>
-      </md-button>
-      <ProjectModal></ProjectModal>
-    </div>
+    <div><ProjectModal /></div>
     <div
       v-for="project in projects"
       :key="project._id"
@@ -21,7 +16,7 @@
 
 <script>
 import ProjectCard from '@/components/ProjectCard.vue';
-import ProjectModal from '@/modals/project.vue';
+import ProjectModal from '@/components/modals/ProjectModal.vue';
 import { mapState, mapActions } from 'vuex';
 
 export default {
@@ -30,15 +25,18 @@ export default {
     ProjectCard,
     ProjectModal,
   },
+  data: () => ({}),
   computed: {
     ...mapState({
       pageHeader: state => state.pageHeader,
       projects: state => state.project.items,
+      users: state => state.user.items,
     }),
   },
   methods: {
     ...mapActions({
       updatePageHeader: 'updatePageHeader',
+      fetchUsers: 'user/fetchUsers',
       fetchProject: 'project/fetchProject',
       fetchProjects: 'project/fetchProjects',
     }),
@@ -49,6 +47,7 @@ export default {
     },
   },
   created() {
+    this.fetchUsers();
     this.fetchProjects();
   },
 };
