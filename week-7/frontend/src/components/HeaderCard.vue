@@ -7,18 +7,7 @@
             <md-badge :md-content="getTaskCount" class="md-default">
               <div class="header">{{ backlog.name }}</div>
             </md-badge>
-            <md-menu md-size="small">
-              <md-button md-menu-trigger class="md-fab md-mini"> <md-icon>add</md-icon></md-button>
-
-              <md-menu-content>
-                <md-menu-item title="Add New Spring" aria-label="Add New Spring">
-                  <md-icon>ballot</md-icon> Add sprint</md-menu-item
-                >
-                <md-menu-item title="Add New Task" aria-label="Add New Task"
-                  ><md-icon>confirmation_number</md-icon> Add task</md-menu-item
-                >
-              </md-menu-content>
-            </md-menu>
+            <TaskModal :backlog="backlog" />
           </div>
           <div v-if="backlog.name !== 'Backlog'" class="md-subhead">Deadline: {{ backlog.deadline }}</div>
         </md-card-header>
@@ -28,8 +17,12 @@
 </template>
 
 <script>
+import TaskModal from '@/components/modals/TaskModal.vue';
 export default {
   name: 'HeaderCard',
+  components: {
+    TaskModal,
+  },
   props: {
     backlog: {
       type: Object,
