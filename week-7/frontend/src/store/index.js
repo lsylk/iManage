@@ -6,9 +6,19 @@ import project from './modules/project';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
+  state: {
+    pageHeader: '',
+  },
+  mutations: {
+    SET_PAGE_HEADER(state, header) {
+      state.pageHeader = header;
+    },
+  },
+  actions: {
+    async updatePageHeader({ commit }, pageHeader) {
+      commit('SET_PAGE_HEADER', pageHeader);
+    },
+  },
   modules: {
     user,
     project,
