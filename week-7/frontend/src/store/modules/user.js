@@ -17,6 +17,13 @@ export default {
     SET_USERS(state, data) {
       state.items = data;
     },
+    ADD_USER(state, user) {
+      state.items = state.items.concat(user);
+    },
+
+    ADD_TASK(state, task) {
+      state.item.tasks = state.item.tasks.concat(task);
+    },
   },
 
   actions: {
@@ -28,6 +35,16 @@ export default {
     async fetchUsers({ commit }) {
       const result = await axios.get(`http://localhost:3000/user/show/all`);
       commit('SET_USERS', result.data);
+    },
+
+    async addUser({ commit }, user) {
+      const result = await axios.post(`http://localhost:3000/user`, user);
+      commit('ADD_USER', result.data);
+    },
+
+    async addTask({ commit }, task) {
+      const result = await axios.post(`http://localhost:3000/user/${this.state.item._id}/task`, task);
+      commit('ADD_TASK', result.data);
     },
   },
 };

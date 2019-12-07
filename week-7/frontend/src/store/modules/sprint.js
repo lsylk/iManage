@@ -26,16 +26,6 @@ export default {
     ADD_SPRINT(state, sprint) {
       state.item.sprints.push(sprint);
     },
-
-    ADD_TASK_TO_BACKLOG(state, task) {
-      state.item.backlog.tasks = state.item.backlog.tasks.concat(task);
-    },
-
-    ADD_TASK_TO_SPRINT(state, { sprintId, task }) {
-      console.log("AMGRY", state.item, state.item.sprints);
-      const sprintIndex = state.item.sprints.findIndex(sprint => sprint._id === sprintId);
-      state.item.sprints[sprintIndex].tasks = state.item.sprints[sprintIndex].tasks.concat(task);
-    },
   },
 
   actions: {
@@ -57,19 +47,6 @@ export default {
     async addSprint({ commit }, sprint) {
       const result = await axios.post(`http://localhost:3000/project/${this.state.project.item._id}/sprint`, sprint);
       commit('ADD_SPRINT', result.data);
-    },
-
-    async addTaskToBacklog({ commit }, task) {
-      const result = await axios.post(
-        `http://localhost:3000/project/${this.state.project.item._id}/backlog/task`,
-        task
-      );
-      commit('ADD_TASK_TO_BACKLOG', result.data);
-    },
-
-    async addTaskToSprint({ commit }, { sprintId, task }) {
-      const result = await axios.post(`http://localhost:3000/sprint/${sprintId}/task`, task);
-      commit('ADD_TASK_TO_SPRINT', { sprintId, task: result.data });
     },
   },
 };
