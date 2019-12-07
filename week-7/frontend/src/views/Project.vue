@@ -2,8 +2,8 @@
   <div>
     <div class="project">
       <div class="backlog">
+        <HeaderCard :backlog="backlogDetails" :tasksCount="project.backlog.tasks.length"> </HeaderCard>
         <span v-if="project.backlog.tasks.length > 0">
-          <HeaderCard :backlog="backlogDetails"> </HeaderCard>
           <draggable
             group="all-tasks"
             class="draggable-list"
@@ -39,7 +39,7 @@
 import Draggable from 'vuedraggable';
 import HeaderCard from '@/components/HeaderCard.vue';
 import TaskCard from '@/components/TaskCard.vue';
-import { mapState, mapActions } from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
   name: 'Project',
@@ -59,12 +59,7 @@ export default {
       project: state => state.project.item,
     }),
   },
-  methods: {
-    ...mapActions({ fetchProjects: 'project/fetchProjects', fetchTasksTEST: 'project/fetchTasksTEST' }),
-  },
-  created() {
-    this.fetchProjects();
-  },
+  methods: {},
 };
 </script>
 

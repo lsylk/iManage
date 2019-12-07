@@ -4,7 +4,9 @@
       <md-card-area>
         <md-card-header>
           <div class="md-title">
-            <div>{{ backlog.name }}</div>
+            <md-badge :md-content="getTaskCount" class="md-default">
+              <div class="header">{{ backlog.name }}</div>
+            </md-badge>
             <md-menu md-size="small">
               <md-button md-menu-trigger class="md-fab md-mini"> <md-icon>add</md-icon></md-button>
 
@@ -36,8 +38,20 @@ export default {
         deadline: '10/222',
       }),
     },
+    tasksCount: {
+      type: Number,
+      default: 0,
+    },
   },
-  computed: {},
+  computed: {
+    getTaskCount() {
+      if (this.backlog.name === 'Backlog') {
+        return this.tasksCount;
+      } else {
+        return this.backlog.tasks.length;
+      }
+    },
+  },
 
   methods: {},
 };
@@ -70,10 +84,12 @@ export default {
     }
   }
 }
+.header {
+  margin: 10px;
+}
 .backlog {
   background-color: #b3a5a587 !important;
 }
-
 .sprint {
   background-color: rgba(218, 84, 84, 0.25) !important;
 }
