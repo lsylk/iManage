@@ -5,7 +5,6 @@ export default {
 
   state: {
     item: {},
-
     items: [],
   },
 
@@ -19,6 +18,10 @@ export default {
     SET_PROJECTS(state, projects) {
       state.items = projects;
     },
+
+    ADD_PROJECT(state, project) {
+      state.items = state.items.concat(project);
+    },
   },
 
   actions: {
@@ -30,6 +33,11 @@ export default {
     async fetchProjects({ commit }) {
       const result = await axios.get(`http://localhost:3000/project/show/all`);
       commit('SET_PROJECTS', result.data);
+    },
+
+    async addProject({ commit }, project) {
+      const result = await axios.post(`http://localhost:3000/project`, project);
+      commit('ADD_PROJECT', result.data);
     },
   },
 };
