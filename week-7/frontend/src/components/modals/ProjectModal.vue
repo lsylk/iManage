@@ -4,33 +4,30 @@
       <md-dialog-title>Create Project</md-dialog-title>
       <md-dialog-content>
         <form novalidate class="md-layout" @submit.prevent="validateProject">
-          <md-field :class="getValidationClass('projectName')">
-            <label for="project-name">Project Name</label>
-            <md-input name="project-name" id="project-name" v-model="form.projectName" :disabled="sending" />
-            <span class="md-error" v-if="!$v.form.projectName.required">The project name is required</span>
-            <span class="md-error" v-else-if="!$v.form.projectName.minlength">Invalid project name</span>
+          <md-field :class="getValidationClass('name')">
+            <label for="name">Project Name</label>
+            <md-input name="name" id="name" v-model="form.name" :disabled="sending" />
+            <span class="md-error" v-if="!$v.form.name.required">The project name is required</span>
+            <span class="md-error" v-else-if="!$v.form.name.minlength">Invalid project name</span>
           </md-field>
 
           <md-field :class="getValidationClass('users')">
             <label for="users">Users</label>
-            <md-select name="users" id="users" v-model="form.users" md-dense :disabled="sending" multiple>
+            <md-select name="users" id="users" v-model="form.users" :disabled="sending" multiple>
               <span v-for="user in users" :key="user._id">
-                <md-option :value="`${user.name} ${user.surname}`">{{ formatUserName(user) }}</md-option>
+                <md-option :value="user._id">{{ formatUserName(user) }}</md-option>
               </span>
             </md-select>
-            <span class="md-error">The users are required</span>
           </md-field>
 
           <md-progress-bar md-mode="indeterminate" v-if="sending" />
 
-          <md-snackbar :md-active.sync="projectSaved"
-            >The project {{ projectName }} was saved with success!</md-snackbar
-          >
+          <md-snackbar :md-active.sync="projectSaved">The project {{ form.name }} was saved with success!</md-snackbar>
         </form>
       </md-dialog-content>
       <md-dialog-actions>
         <md-button class="md-primary" @click="showDialog = false">Close</md-button>
-        <md-button class="md-primary" @click="showDialog = false">Save</md-button>
+        <md-button type="submit" class="md-primary" @click="saveProject()" :disabled="sending">Save</md-button>
       </md-dialog-actions>
     </md-dialog>
 
@@ -43,30 +40,30 @@
 <script>
 import { validationMixin } from 'vuelidate';
 import { required, minLength } from 'vuelidate/lib/validators';
+import { mapState, mapActions } from 'vuex';
+
 export default {
   name: 'projectModal',
   mixins: [validationMixin],
   data: () => ({
     showDialog: false,
     form: {
-      projectName: null,
-      deadline: null,
+      name: null,
+      users: [],
     },
     projectSaved: false,
     sending: false,
   }),
   validations: {
     form: {
-      projectName: {
+      name: {
         required,
         minLength: minLength(3),
-      },
-      users: {
-        required,
       },
     },
   },
   methods: {
+    ...mapActions({ addProject: 'project/addProject' }),
     getValidationClass(fieldName) {
       const field = this.$v.form[fieldName];
 
@@ -78,18 +75,15 @@ export default {
     },
     clearForm() {
       this.$v.$reset();
-      this.form.projectName = null;
+      this.form.name = null;
       this.form.users = [];
     },
-    saveProject() {
+    async saveProject() {
       this.sending = true;
-
-      //TO DO: Make request to Save project
-      // window.setTimeout(() => {
-      //   this.projectSaved = true
-      //   this.sending = false
-      //   this.clearForm()
-      // }, 1500)
+      await this.addProject(this.form);
+      this.projectSaved = true;
+      this.sending = false;
+      this.clearForm();
     },
     validateProject() {
       this.$v.$touch();
@@ -98,11 +92,16 @@ export default {
         this.saveProject();
       }
     },
+    formatUserName(user) {
+      return `${user.name[0].toUpperCase()}${user.name.slice(1)} ${user.surname[0].toUpperCase()}${user.surname.slice(
+        1
+      )}`;
+    },
   },
   computed: {
-    formatUserName(user) {
-      return `${user.name[0].Uppercase()}${user.name.slice(1)} ${user.surname[0].Uppercase()}${user.surname.slice(1)}`;
-    },
+    ...mapState({
+      users: state => state.user.items,
+    }),
   },
 };
 </script>
