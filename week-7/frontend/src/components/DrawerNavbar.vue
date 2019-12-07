@@ -73,7 +73,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions({ updatePageHeader: 'updatePageHeader', }),
+    ...mapActions({ updatePageHeader: 'updatePageHeader' }),
 
     toggleMenu() {
       this.menuVisible = !this.menuVisible;

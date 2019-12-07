@@ -21,5 +21,4 @@ footer {
   justify-content: center;
   align-content: center;
 }
-
 </style>
