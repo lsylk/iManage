@@ -32,7 +32,6 @@ export default {
     },
 
     ADD_TASK_TO_SPRINT(state, { sprintId, task }) {
-      console.log("AMGRY", state.item, state.item.sprints);
       const sprintIndex = state.item.sprints.findIndex(sprint => sprint._id === sprintId);
       state.item.sprints[sprintIndex].tasks = state.item.sprints[sprintIndex].tasks.concat(task);
     },
