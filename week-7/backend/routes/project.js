@@ -9,7 +9,7 @@ const TaskService = require("./../services/task-service");
 router.get("/:projectId", async (req, res) => {
   const projectId = req.params.projectId;
   const project = await ProjectService.find(projectId);
-  if (!project) res.status(404)
+  if (!project) res.status(404);
   res.send(project);
 });
 
@@ -21,16 +21,17 @@ router.get("/show/all", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const data = req.body;
-  const backlog = await BacklogService.create({tasks:[]});
+  const backlog = await BacklogService.create({ tasks: [] });
   data.backlog = backlog;
-  const project = await ProjectService.create(data);
+  let project = await ProjectService.create(data);
+  project = await ProjectService.find(project._id);
   res.send(project);
 });
 
 router.post("/:projectId/sprint", async (req, res) => {
   const projectId = req.params.projectId;
   const project = await ProjectService.find(projectId);
-  if (!project) res.status(404)
+  if (!project) res.status(404);
   const sprint = await SprintService.create(req.body);
   await ProjectService.addSprint(project, sprint);
   res.send(sprint);
@@ -39,16 +40,17 @@ router.post("/:projectId/sprint", async (req, res) => {
 router.post("/:projectId/backlog/task", async (req, res) => {
   const projectId = req.params.projectId;
   const project = await ProjectService.find(projectId);
-  if (!project) res.status(404)
-  const task = await TaskService.create(req.body);
+  if (!project) res.status(404);
+  let task = await TaskService.create(req.body);
   await BacklogService.addTask(project.backlog, task);
+  task = await TaskService.find(task._id);
   res.send(task);
 });
 
 router.put("/:projectId", async (req, res) => {
   const projectId = req.params.projectId;
   let project = await ProjectService.find(projectId);
-  if (!project) res.status(404)
+  if (!project) res.status(404);
   await ProjectService.update(project, req.body);
   project = await ProjectService.find(projectId);
   res.send(project);
@@ -62,7 +64,7 @@ router.delete("/:projectId", async (req, res) => {
 router.delete("/:projectId/backlog", async (req, res) => {
   const projectId = req.params.projectId;
   const project = await ProjectService.find(projectId);
-  if (!project) res.status(404)
+  if (!project) res.status(404);
   await ProjectService.cleanBacklog(project);
   res.send(project);
 });
@@ -70,8 +72,8 @@ router.delete("/:projectId/backlog", async (req, res) => {
 router.delete("/:projectId/backlog/task/:taskId", async (req, res) => {
   const projectId = req.params.projectId;
   const project = await ProjectService.find(projectId);
-  if (!project) res.status(404)
-  await BacklogService.deleteTask(project.backlog, {_id: req.params.taskId})
+  if (!project) res.status(404);
+  await BacklogService.deleteTask(project.backlog, { _id: req.params.taskId });
   res.send(project);
 });
 

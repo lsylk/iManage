@@ -29,8 +29,9 @@ router.post("/:sprintId/task", async (req, res) => {
   const sprintId = req.params.sprintId;
   const sprint = await SprintService.find(sprintId);
   if (!sprint) res.status(404);
-  const task = await TaskService.create(req.body);
+  let task = await TaskService.create(req.body);
   await SprintService.addTask(sprint, task);
+  task = await TaskService.find(task._id);
   res.send(task);
 });
 
