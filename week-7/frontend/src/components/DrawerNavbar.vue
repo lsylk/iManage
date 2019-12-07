@@ -5,7 +5,7 @@
         <md-button v-if="!menuVisible" class="md-icon-button" @click="toggleMenu">
           <md-icon>menu</md-icon>
         </md-button>
-        <div class="md-title">{{ page }}</div>
+        <div class="md-title">{{ pageHeader }}</div>
         <!-- TO DO: add user avatar -->
         <div class="user">
           user avatar
@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'DrawerNavbar',
@@ -64,6 +64,7 @@ export default {
   }),
   computed: {
     ...mapState({
+      pageHeader: state => state.pageHeader,
       user: state => state.user.item,
       project: state => state.project.item,
     }),
@@ -72,6 +73,8 @@ export default {
     },
   },
   methods: {
+    ...mapActions({ updatePageHeader: 'updatePageHeader', }),
+
     toggleMenu() {
       this.menuVisible = !this.menuVisible;
     },
@@ -84,17 +87,19 @@ export default {
       let routerObject = {};
       switch (route) {
       case 'profile':
+        this.updatePageHeader('Profile');
         routerObject = { name: 'user', params: { id: '123' } };
         break;
       case 'myTasks':
+        this.updatePageHeader('My Task');
         routerObject = { name: 'myTasks' };
         break;
-
       case 'myProjects':
+        this.updatePageHeader('My Projects');
         routerObject = { name: 'myProjects' };
         break;
-
       case 'Projects':
+        this.updatePageHeader('Projects');
         routerObject = { name: 'projects' };
         break;
       }
