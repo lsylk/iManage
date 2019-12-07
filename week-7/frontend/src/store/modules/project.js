@@ -22,6 +22,10 @@ export default {
     ADD_PROJECT(state, project) {
       state.items = state.items.concat(project);
     },
+
+    ADD_SPRINT(state, sprint) {
+      state.item.sprints.push(sprint);
+    },
   },
 
   actions: {
@@ -38,6 +42,11 @@ export default {
     async addProject({ commit }, project) {
       const result = await axios.post(`http://localhost:3000/project`, project);
       commit('ADD_PROJECT', result.data);
+    },
+
+    async addSprint({ commit }, sprint) {
+      const result = await axios.post(`http://localhost:3000/project/${this.state.project.item._id}/sprint`, sprint);
+      commit('ADD_SPRINT', result.data);
     },
   },
 };
