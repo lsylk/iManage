@@ -47,7 +47,7 @@ export default {
 
   methods: {
     formatUserName(user) {
-      return `${user.name[0]}${user.surname[0]}`;
+      return `${user.name[0].toUpperCase()}${user.surname[0].toUpperCase()}`;
     },
   },
 };
