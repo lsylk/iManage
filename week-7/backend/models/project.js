@@ -22,7 +22,7 @@ const ProjectSchema = new mongoose.Schema({
     type: mongoose.SchemaTypes.ObjectId,
     ref: "Backlog",
     autopopulate: {
-      maxDepth: 2
+      maxDepth: 4
     }
   },
   sprints: [
@@ -30,7 +30,7 @@ const ProjectSchema = new mongoose.Schema({
       type: mongoose.SchemaTypes.ObjectId,
       ref: "Sprint",
       autopopulate: {
-        maxDepth: 2
+        maxDepth: 4
       }
     }
   ]

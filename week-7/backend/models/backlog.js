@@ -7,7 +7,7 @@ const BacklogSchema = new mongoose.Schema({
       type: mongoose.SchemaTypes.ObjectId,
       ref: "Task",
       autopopulate: {
-        maxDepth: 1
+        maxDepth: 3
       }
     }
   ]
