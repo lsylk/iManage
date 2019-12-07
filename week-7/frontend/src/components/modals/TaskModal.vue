@@ -4,43 +4,37 @@
       <md-dialog-title>Create Task</md-dialog-title>
       <md-dialog-content>
         <form novalidate class="md-layout" @submit.prevent="validateTask">
-          <md-field :class="getValidationClass('taskDeacription')">
-            <label for="taskt-description">Task Description</label>
-            <md-input
-              name="task-description"
-              id="task-description"
-              v-model="form.taskDescription"
-              :disabled="sending"
-            />
-            <span class="md-error" v-if="!$v.form.taskDescription.required">The task description is required</span>
-            <span class="md-error" v-else-if="!$v.form.taskDescription.minlength">Invalid task description</span>
+          <md-field :class="getValidationClass('description')">
+            <label for="description">Task Description</label>
+            <md-input name="description" id="description" v-model="form.description" :disabled="sending" />
+            <span class="md-error" v-if="!$v.form.description.required">The task description is required</span>
+            <span class="md-error" v-else-if="!$v.form.description.minlength">Invalid task description</span>
           </md-field>
 
-          <md-field :class="getValidationClass('taskType')">
-            <label for="taskt-type">Type </label>
-            <div v-for="(type, index) in taskTypes" :key="index">
-              <md-radio v-model="taskType" :value="type">{{ type }}</md-radio>
+          <div class="task-options md-field md-theme-default" :class="getValidationClass('type')">
+            <label for="type">Type </label>
+            <div v-for="(taskType, index) in types" :key="index">
+              <md-radio v-model="form.type" :value="taskType">{{ taskType }}</md-radio>
             </div>
-            <span class="md-error" v-if="!$v.form.taskType.required">The task type is required</span>
-          </md-field>
+            <!-- <span class="md-error" v-if="!$v.form.type.required">The task type is required</span> -->
+          </div>
 
           <md-field :class="getValidationClass('users')">
             <label for="users">Users</label>
             <md-select name="users" id="users" v-model="form.users" md-dense :disabled="sending" multiple>
               <span v-for="user in users" :key="user._id">
-                <md-option :value="`${user.name} ${user.surname}`">{{ formatUserName(user) }}</md-option>
+                <md-option :value="user._id">{{ formatUserName(user) }}</md-option>
               </span>
             </md-select>
-            <span class="md-error">The users are required</span>
           </md-field>
 
-          <md-field :class="getValidationClass('taskStatus')">
-            <label for="taskt-status">Status </label>
-            <div v-for="(status, index) in taskStatus" :key="index">
-              <md-radio v-model="taskStatus" :value="status">{{ status }}</md-radio>
+          <div class="task-options md-field md-theme-default" :class="getValidationClass('status')">
+            <label for="status">Status </label>
+            <div v-for="(taskStatus, index) in status" :key="index">
+              <md-radio v-model="form.status" :value="taskStatus">{{ taskStatus }}</md-radio>
             </div>
-            <span class="md-error" v-if="!$v.form.taskStatus.required">The task status is required</span>
-          </md-field>
+            <!-- <span class="md-error" v-if="!$v.form.status.required">The task status is required</span> -->
+          </div>
 
           <md-field :class="getValidationClass('notes')">
             <label for="notes">Notes</label>
@@ -54,12 +48,12 @@
 
           <md-progress-bar md-mode="indeterminate" v-if="sending" />
 
-          <md-snackbar :md-active.sync="taskSaved">The task {{ taskName }} was saved with success!</md-snackbar>
+          <md-snackbar :md-active.sync="taskSaved">The task {{ form.description }} was saved with success!</md-snackbar>
         </form>
       </md-dialog-content>
       <md-dialog-actions>
         <md-button class="md-primary" @click="showDialog = false">Close</md-button>
-        <md-button class="md-primary" @click="showDialog = false">Save</md-button>
+        <md-button type="submit" class="md-primary" @click="saveTask()" :disabled="sending">Save</md-button>
       </md-dialog-actions>
     </md-dialog>
 
@@ -72,18 +66,19 @@
 <script>
 import { validationMixin } from 'vuelidate';
 import { required, minLength } from 'vuelidate/lib/validators';
+import { mapState, mapActions } from 'vuex';
 export default {
   name: 'taskModal',
   mixins: [validationMixin],
   data: () => ({
     showDialog: false,
-    taskTypes: ['Feature', 'Bug', 'Test'],
-    taskStatus: ['To do', 'In Progress', 'Done'],
+    types: ['Feature', 'Bug', 'Test'],
+    status: ['To do', 'In Progress', 'Done'],
     form: {
-      taskDescription: null,
-      taskType: null,
+      description: null,
+      type: null,
       users: [],
-      taskStatus: null,
+      status: null,
       notes: null,
       comments: null,
     },
@@ -92,19 +87,28 @@ export default {
   }),
   validations: {
     form: {
-      taskDescription: {
+      description: {
         required,
         minLength: minLength(3),
       },
-      taskType: {
+      type: {
         required,
       },
-      taskStatus: {
+      status: {
         required,
       },
     },
   },
+  props: {
+    backlog: {
+      type: Object,
+    },
+  },
   methods: {
+    ...mapActions({
+      addTaskToBacklog: 'project/addTaskToBacklog',
+      addTaskToSprint: 'project/addTaskToSprint',
+    }),
     getValidationClass(fieldName) {
       const field = this.$v.form[fieldName];
 
@@ -116,18 +120,24 @@ export default {
     },
     clearForm() {
       this.$v.$reset();
-      this.form.taskName = null;
-      this.form.deadline = null;
-    },
-    savetask() {
-      this.sending = true;
+      this.form.description = null;
+      this.form.type = null;
+      this.form.users = [];
+      this.form.comments = [];
+      this.form.notes = [];
 
-      //TO DO: Make request to Save task
-      // window.setTimeout(() => {
-      //   this.taskSaved = true
-      //   this.sending = false
-      //   this.clearForm()
-      // }, 1500)
+      this.form.status = null;
+    },
+    async saveTask() {
+      this.sending = true;
+      if (this.backlog.name === 'Backlog') {
+        await this.addTaskToBacklog(this.form);
+      } else {
+        await this.addTaskToSprint({ sprintId: this.backlog._id, task: this.form });
+      }
+      this.taskSaved = true;
+      this.sending = false;
+      this.clearForm();
     },
     validatetask() {
       this.$v.$touch();
@@ -136,6 +146,16 @@ export default {
         this.savetask();
       }
     },
+    formatUserName(user) {
+      return `${user.name[0].toUpperCase()}${user.name.slice(1)} ${user.surname[0].toUpperCase()}${user.surname.slice(
+        1
+      )}`;
+    },
+  },
+  computed: {
+    ...mapState({
+      users: state => state.user.items,
+    }),
   },
 };
 </script>
@@ -152,5 +172,13 @@ export default {
 }
 form {
   margin: 12px;
+}
+.task-options {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  div {
+    margin-top: 15px !important;
+  }
 }
 </style>
