@@ -6,9 +6,10 @@
           <md-icon>menu</md-icon>
         </md-button>
         <div class="md-title">{{ pageHeader }}</div>
-        <!-- TO DO: add user avatar -->
-        <div class="user">
-          user avatar
+        <div class="user-avatar">
+          <md-avatar class="md-avatar-icon">
+            {{formatUserName()}}              
+          </md-avatar>
         </div>
       </md-app-toolbar>
 
@@ -88,7 +89,7 @@ export default {
       switch (route) {
       case 'profile':
         this.updatePageHeader('Profile');
-        routerObject = { name: 'user', params: { id: '123' } };
+        routerObject = { name: 'user', params: { id: '5debedc01c51afd731f72495' } };
         break;
       case 'myTasks':
         this.updatePageHeader('My Task');
@@ -104,6 +105,11 @@ export default {
         break;
       }
       this.$router.push(routerObject);
+    },
+    formatUserName() {
+      if (this.user.name.length > 0 && this.user.surname.length > 0) {
+        return `${this.user.name[0].toUpperCase()}${this.user.surname[0].toUpperCase()}`;
+      }
     },
   },
 };
