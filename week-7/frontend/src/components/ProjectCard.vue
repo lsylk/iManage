@@ -4,6 +4,14 @@
       <md-card-area>
         <md-card-media>
           <img :src="`https://picsum.photos/320/53?random=${item._id}`" alt="Random cover image for project card" />
+          <div class="action-buttons">
+            <md-button class="md-icon-button md-small">
+              <md-icon>edit</md-icon>
+            </md-button>
+            <md-button class="md-icon-button md-small">
+              <md-icon>delete</md-icon>
+            </md-button>
+          </div>
         </md-card-media>
 
         <md-card-header>
@@ -20,7 +28,7 @@
       </md-card-area>
       <md-card-actions md-alignment="left" v-if="item.users.length > 0">
         <span v-for="(user, index) in item.users" :key="index">
-          <md-avatar class="md-avatar-icon md-small">{{ formatUserName(user) }}</md-avatar>
+          <md-avatar class="md-avatar-icon md-small  md-list-action">{{ formatUserName(user) }}</md-avatar>
         </span>
       </md-card-actions>
     </md-card>
@@ -66,6 +74,14 @@ export default {
     img {
       max-height: 100px;
     }
+  }
+}
+.action-buttons {
+  position: absolute;
+  top: 7px;
+  right: 10px;
+  .md-button {
+    background-color: #f5f5f5d1;
   }
 }
 </style>

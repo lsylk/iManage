@@ -17,11 +17,14 @@
     <md-card-actions md-alignment="right">
       <div class="users" v-if="task.users && task.users.length > 0">
         <span v-for="user in task.users" :key="user._id">
-          <md-avatar class="md-avatar-icon md-small">{{ formatUserName(user) }}</md-avatar>
+          <md-avatar class="md-avatar-icon md-small  md-list-action">{{ formatUserName(user) }}</md-avatar>
         </span>
       </div>
-      <md-button class="md-icon-button md-list-action">
+      <md-button class="md-icon-button md-small md-list-action">
         <md-icon class="md-primary">edit</md-icon>
+      </md-button>
+       <md-button class="md-icon-button md-small md-list-action">
+        <md-icon class="md-primary">delete</md-icon>
       </md-button>
     </md-card-actions>
   </md-card>
