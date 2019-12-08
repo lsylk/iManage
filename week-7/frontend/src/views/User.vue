@@ -34,9 +34,9 @@ export default {
         1
       )} ${this.user.surname[0].toUpperCase()}${this.user.surname.slice(1)}`;
     },
-    created() {
-      this.fetchUser(this.$route.params.id);
-    },
+  },
+  created() {
+    this.fetchUser(this.$route.params.id);
   },
 };
 </script>
