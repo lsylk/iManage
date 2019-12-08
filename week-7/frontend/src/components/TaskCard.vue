@@ -23,7 +23,7 @@
       <md-button class="md-icon-button md-small md-list-action">
         <md-icon class="md-primary">edit</md-icon>
       </md-button>
-       <md-button class="md-icon-button md-small md-list-action">
+      <md-button class="md-icon-button md-small md-list-action" @click="removeTask(task._id)">
         <md-icon class="md-primary">delete</md-icon>
       </md-button>
     </md-card-actions>
@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'TaskCard',
   props: {
@@ -45,10 +47,31 @@ export default {
         status: 'status',
       }),
     },
+    taskContainer: {
+      type: Object,
+      default: () => ({
+        type: null,
+        id: null,
+      }),
+    },
   },
   computed: {},
 
   methods: {
+    ...mapActions({
+      deleteTask: 'user/deleteTask',
+      deleteBacklogTask: 'project/deleteBacklogTask',
+      deleteSprintTask: 'project/deleteSprintTask',
+    }),
+    removeTask(id) {
+      if (this.taskContainer.type === 'user') {
+        this.deleteTask(id);
+      } else if (this.taskContainer.type === 'backlog') {
+        this.deleteBacklogTask(id);
+      } else {
+        this.deleteSprintTask({ sprintId: this.taskContainer.id, id });
+      }
+    },
     formatUserName(user) {
       if (user.name.length > 0 && user.surname.length > 0) {
         return `${user.name[0].toUpperCase()}${user.surname[0].toUpperCase()}`;

@@ -35,6 +35,15 @@ export default {
       const sprintIndex = state.item.sprints.findIndex(sprint => sprint._id === sprintId);
       state.item.sprints[sprintIndex].tasks = state.item.sprints[sprintIndex].tasks.concat(task);
     },
+
+    DELETE_BACKLOG_TASK(state, id) {
+      state.item.backlog.tasks = state.item.backlog.tasks.filter(task => task._id !== id);
+    },
+
+    DELETE_SPRINT_TASK(state, { sprintId, id }) {
+      const sprintIndex = state.item.sprints.findIndex(sprint => sprint._id === sprintId);
+      state.item.sprints[sprintIndex].tasks = state.item.sprints[sprintIndex].tasks.filter(task => task._id !== id);
+    },
   },
 
   actions: {
@@ -69,6 +78,16 @@ export default {
     async addTaskToSprint({ commit }, { sprintId, task }) {
       const result = await axios.post(`http://localhost:3000/sprint/${sprintId}/task`, task);
       commit('ADD_TASK_TO_SPRINT', { sprintId, task: result.data });
+    },
+
+    async deleteBacklogTask({ commit }, id) {
+      await axios.delete(`http://localhost:3000/project/${this.state.project.item._id}/backlog/task/${id}`);
+      commit('DELETE_BACKLOG_TASK', id);
+    },
+
+    async deleteSprintTask({ commit }, { sprintId, id }) {
+      await axios.delete(`http://localhost:3000/sprint/${sprintId}/task/${id}`);
+      commit('DELETE_SPRINT_TASK', { sprintId, id });
     },
   },
 };

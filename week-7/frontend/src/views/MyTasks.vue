@@ -2,7 +2,7 @@
   <div class="myTasks">
     <div id="myTasksLeftContent">
       <div v-for="task in user.tasks" :key="task._id">
-        <TaskCard :task="task" />
+        <TaskCard :task="task" :taskContainer="taskContainer"/>
       </div>
     </div>
     <div id="myTasksRightContent"><TaskModal :backlog="userTaskDetails" /></div>
@@ -25,6 +25,10 @@ export default {
       name: 'UserTasks',
       deadline: null,
     },
+    taskContainer:{
+      type: 'user',
+      id: null
+    }
   }),
   computed: {
     ...mapState({

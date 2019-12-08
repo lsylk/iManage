@@ -11,7 +11,12 @@
           :list="project.backlog.tasks"
           :animation="200"
         >
-          <TaskCard v-for="task in project.backlog.tasks" :task="task" :key="task._id"></TaskCard>
+          <TaskCard
+            v-for="task in project.backlog.tasks"
+            :task="task"
+            :key="task._id"
+            :taskContainer="{ type: 'backlog', id: null }"
+          ></TaskCard>
         </draggable>
       </span>
     </div>
@@ -26,7 +31,12 @@
           :list="sprint.tasks"
           :animation="200"
         >
-          <TaskCard v-for="task in sprint.tasks" :task="task" :key="task._id"></TaskCard>
+          <TaskCard
+            v-for="task in sprint.tasks"
+            :task="task"
+            :key="task._id"
+            :taskContainer="{ type: 'sprint', id: sprint._id }"
+          ></TaskCard>
         </draggable>
       </div>
     </div>
