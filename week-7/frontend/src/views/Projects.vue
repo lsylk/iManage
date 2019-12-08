@@ -1,16 +1,19 @@
 <template>
   <div class="projects">
-    <div><ProjectModal /></div>
-    <div
-      v-for="project in projects"
-      :key="project._id"
-      @click="
-        goToProject(project);
-        fetchProject(project._id);
-      "
-    >
-      <ProjectCard :item="project" />
+    <div id="projectsLeftContent">
+      <div
+        v-for="project in projects"
+        :key="project._id"
+        @click="
+          goToProject(project);
+          fetchProject(project._id);
+        "
+      >
+        <ProjectCard :item="project" />
+      </div>
     </div>
+
+    <div id="projectsRightContent"><ProjectModal /></div>
   </div>
 </template>
 
@@ -55,15 +58,20 @@ export default {
 
 <style>
 .projects {
+  display: grid;
+  grid-template-areas: 'projectsLeftContent projectsRightContent';
+  grid-template-columns: 95% 5%;
+}
+
+#projectsLeftContent {
+  grid-area: projectsLeftContent;
   display: flex;
   justify-content: center;
   align-content: center;
   flex-wrap: wrap;
-  position: relative;
 }
-.project-add-button {
-  position: absolute;
-  top: 10px;
-  right: 30px;
+
+#projectsRightContent {
+  grid-area: projectsRightContent;
 }
 </style>
