@@ -107,9 +107,10 @@ export default {
       this.$router.push(routerObject);
     },
     formatUserName() {
-      if (this.user.name.length > 0 && this.user.surname.length > 0) {
+      if (this.user.name && this.user.name.length > 0 && this.user.surname.length > 0) {
         return `${this.user.name[0].toUpperCase()}${this.user.surname[0].toUpperCase()}`;
       }
+      return '';
     },
   },
 };
