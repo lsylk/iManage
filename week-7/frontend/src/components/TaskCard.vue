@@ -14,8 +14,8 @@
         {{ task.description }}
       </md-card-content>
     </md-card-area>
-    <md-card-actions md-alignment="right" v-if="task.users && task.users.length > 0">
-      <div class="users">
+    <md-card-actions md-alignment="right">
+      <div class="users" v-if="task.users && task.users.length > 0">
         <span v-for="user in task.users" :key="user._id">
           <md-avatar class="md-avatar-icon md-small">{{ formatUserName(user) }}</md-avatar>
         </span>
@@ -34,12 +34,12 @@ export default {
     task: {
       type: Object,
       default: () => ({
-        description: '',
-        type: '',
+        description: 'descriptiom',
+        type: 'type',
         notes: [],
         comments: [],
-        users: [{ name: '', surname: '' }],
-        status: '',
+        users: [{ name: 'name', surname: 'surname' }],
+        status: 'status',
       }),
     },
   },
@@ -47,7 +47,9 @@ export default {
 
   methods: {
     formatUserName(user) {
-      return `${user.name[0].toUpperCase()}${user.surname[0].toUpperCase()}`;
+      if (user.name.length > 0 && user.surname.length > 0) {
+        return `${user.name[0].toUpperCase()}${user.surname[0].toUpperCase()}`;
+      }
     },
   },
 };
