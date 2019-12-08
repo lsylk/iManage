@@ -57,6 +57,7 @@ export default {
   display: grid;
   grid-template-areas: 'projectsLeftContent projectsRightContent';
   grid-template-columns: 95% 5%;
+  margin: 16px;
 }
 
 #projectsLeftContent {

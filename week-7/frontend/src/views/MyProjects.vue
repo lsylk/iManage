@@ -43,12 +43,11 @@ export default {
     }),
     goToProject(project) {
       this.updatePageHeader(`Project: ${project.name}`);
-
       this.$router.push({ name: 'project', params: { id: project._id } });
     },
   },
   created() {
-    this.fetchUser('5debedd01c51afd731f72496');
+    this.fetchUser(this.$route.params.id);
   },
 };
 </script>
@@ -58,6 +57,7 @@ export default {
   display: grid;
   grid-template-areas: 'myProjectsLeftContent myProjectsRightContent';
   grid-template-columns: 95% 5%;
+  margin: 16px;
 }
 
 #myProjectsLeftContent {
