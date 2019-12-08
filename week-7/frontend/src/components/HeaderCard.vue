@@ -7,7 +7,9 @@
             <md-badge :md-content="getTaskCount" class="md-default">
               <div class="header">{{ backlog.name }}</div>
             </md-badge>
-            <TaskModal :backlog="backlog" />
+            <span class="taskModal">
+              <TaskModal :backlog="backlog" />
+            </span>
           </div>
           <div v-if="backlog.name !== 'Backlog'" class="md-subhead">Deadline: {{ backlog.deadline }}</div>
         </md-card-header>
@@ -28,7 +30,7 @@ export default {
       type: Object,
       default: () => ({
         name: 'name',
-        deadline: '10/222',
+        deadline: '',
       }),
     },
     tasksCount: {
@@ -60,14 +62,10 @@ export default {
     position: relative;
     margin: 0px;
     padding: 5px 0px;
-    .md-menu {
+    .taskModal {
       position: absolute;
-      top: 10px;
-      right: 14px;
-      .md-button {
-        height: 30px;
-        width: 30px;
-      }
+      top: 6px;
+      right: 9px;
     }
     .md-subhead {
       display: flex;
