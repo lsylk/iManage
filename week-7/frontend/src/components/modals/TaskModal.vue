@@ -106,7 +106,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      addTask: 'user/addTask',
+      addTaskToUSer: 'user/addTaskToUSer',
       addTaskToBacklog: 'project/addTaskToBacklog',
       addTaskToSprint: 'project/addTaskToSprint',
     }),
@@ -134,7 +134,7 @@ export default {
       if (this.backlog.name === 'Backlog') {
         await this.addTaskToBacklog(this.form);
       } else if (this.backlog.name === 'UserTasks') {
-        await this.addTask(this.form);
+        await this.addTaskToUSer(this.form);
       } else {
         await this.addTaskToSprint({ sprintId: this.backlog._id, task: this.form });
       }

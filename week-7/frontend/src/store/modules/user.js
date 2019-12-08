@@ -21,11 +21,11 @@ export default {
       state.items = state.items.concat(user);
     },
 
-    ADD_TASK(state, task) {
+    ADD_TASK_TO_USER(state, task) {
       state.item.tasks = state.item.tasks.concat(task);
     },
-
-    DELETE_TASK(state, id) {
+  
+    DELETE_USER_TASK(state, id) {
       state.item.tasks = state.item.tasks.filter(task => {
         task._id !== id;
       });
@@ -48,14 +48,14 @@ export default {
       commit('ADD_USER', result.data);
     },
 
-    async addTask({ commit }, task) {
+    async addTaskToUSer({ commit }, task) {
       const result = await axios.post(`http://localhost:3000/user/${this.state.user.item._id}/task`, task);
-      commit('ADD_TASK', result.data);
+      commit('ADD_TASK_TO_USER', result.data);
     },
 
-    async deleteTask({ commit }, id) {
+    async deleteUserTask({ commit }, id) {
       await axios.delete(`http://localhost:3000/user/${this.state.user.item._id}/task/${id}`);
-      commit('DELETE_TASK', id);
+      commit('DELETE_USER_TASK', id);
     },
   },
 };
