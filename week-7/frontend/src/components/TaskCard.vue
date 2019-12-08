@@ -23,7 +23,7 @@
       <md-button class="md-icon-button md-small md-list-action">
         <md-icon class="md-primary">edit</md-icon>
       </md-button>
-      <md-button class="md-icon-button md-small md-list-action" @click="removeTask(task._id)">
+      <md-button class="md-icon-button md-small md-list-action" @click="deleteTask(task._id)">
         <md-icon class="md-primary">delete</md-icon>
       </md-button>
     </md-card-actions>
@@ -59,13 +59,13 @@ export default {
 
   methods: {
     ...mapActions({
-      deleteTask: 'user/deleteTask',
+      deleteUserTask: 'user/deleteUserTask',
       deleteBacklogTask: 'project/deleteBacklogTask',
       deleteSprintTask: 'project/deleteSprintTask',
     }),
-    removeTask(id) {
+    deleteTask(id) {
       if (this.taskContainer.type === 'user') {
-        this.deleteTask(id);
+        this.deleteUserTask(id);
       } else if (this.taskContainer.type === 'backlog') {
         this.deleteBacklogTask(id);
       } else {
