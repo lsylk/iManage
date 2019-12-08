@@ -5,7 +5,7 @@
         <TaskCard :task="task" />
       </div>
     </div>
-    <div id="myTasksRightContent"><TaskModal /></div>
+    <div id="myTasksRightContent"><TaskModal :backlog="userTaskDetails" /></div>
   </div>
 </template>
 
@@ -20,6 +20,12 @@ export default {
     TaskCard,
     TaskModal,
   },
+  data: () => ({
+    userTaskDetails: {
+      name: 'UserTasks',
+      deadline: null,
+    },
+  }),
   computed: {
     ...mapState({
       user: state => state.user.item,

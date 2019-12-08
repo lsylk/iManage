@@ -106,6 +106,7 @@ export default {
   },
   methods: {
     ...mapActions({
+      addTask: 'user/addTask',
       addTaskToBacklog: 'project/addTaskToBacklog',
       addTaskToSprint: 'project/addTaskToSprint',
     }),
@@ -132,6 +133,8 @@ export default {
       this.sending = true;
       if (this.backlog.name === 'Backlog') {
         await this.addTaskToBacklog(this.form);
+      } else if (this.backlog.name === 'UserTasks') {
+        await this.addTask(this.form);
       } else {
         await this.addTaskToSprint({ sprintId: this.backlog._id, task: this.form });
       }

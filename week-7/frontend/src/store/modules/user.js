@@ -43,7 +43,7 @@ export default {
     },
 
     async addTask({ commit }, task) {
-      const result = await axios.post(`http://localhost:3000/user/${this.state.item._id}/task`, task);
+      const result = await axios.post(`http://localhost:3000/user/${this.state.user.item._id}/task`, task);
       commit('ADD_TASK', result.data);
     },
   },
