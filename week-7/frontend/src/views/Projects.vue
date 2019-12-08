@@ -28,18 +28,15 @@ export default {
     ProjectCard,
     ProjectModal,
   },
-  data: () => ({}),
   computed: {
     ...mapState({
       pageHeader: state => state.pageHeader,
       projects: state => state.project.items,
-      users: state => state.user.items,
     }),
   },
   methods: {
     ...mapActions({
       updatePageHeader: 'updatePageHeader',
-      fetchUsers: 'user/fetchUsers',
       fetchProject: 'project/fetchProject',
       fetchProjects: 'project/fetchProjects',
     }),
@@ -50,7 +47,6 @@ export default {
     },
   },
   created() {
-    this.fetchUsers();
     this.fetchProjects();
   },
 };
