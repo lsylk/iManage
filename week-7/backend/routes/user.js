@@ -51,8 +51,9 @@ router.post("/:userId/task", async (req, res) => {
   const userId = req.params.userId;
   const user = await UserService.find(userId);
   if (!user) res.status(404);
-  const task = await TaskService.create(req.body);
+  let task = await TaskService.create(req.body);
   await UserService.addTask(user, task);
+  task = await TaskService.find(task._id);
   res.send(task);
 });
 
