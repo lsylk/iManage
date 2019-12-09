@@ -12,7 +12,7 @@
               title="Delete Project"
               arial-label="Delete Project"
               class="md-icon-button md-small"
-              @click.prevent="deleteProject(item._id)"
+              @click.stop="deleteProject(item._id)"
             >
               <md-icon>delete</md-icon>
             </md-button>
