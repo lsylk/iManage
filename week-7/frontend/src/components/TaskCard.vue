@@ -114,8 +114,12 @@ export default {
     }
   }
   .md-card-content {
-    padding: 0;
-    margin: 0px 10px 10px 10px;
+    padding-bottom: 10px;
+    margin: 0px 10px 0px 10px;
+  }
+
+  .md-card-actions {
+    padding: 0px 8px 0px 8px;
   }
 }
 .users {
