@@ -35,6 +35,14 @@ router.post("/:sprintId/task", async (req, res) => {
   res.send(task);
 });
 
+router.delete("/:sprintId/tasks", async (req, res) => {
+  const sprintId = req.params.sprintId;
+  let sprint = await SprintService.find(sprintId);
+  if (!sprint) res.status(404);
+  await SprintService.cleanSprint(sprint);
+  res.send(`All tasks from ${sprint.name} were deleted`);
+});
+
 router.delete("/:sprintId/task/:taskId", async (req, res) => {
   const sprintId = req.params.sprintId;
   let sprint = await SprintService.find(sprintId);
