@@ -20,7 +20,7 @@
           <md-avatar class="md-avatar-icon md-small  md-list-action">{{ formatUserName(user) }}</md-avatar>
         </span>
       </div>
-      <md-button class="md-icon-button md-small md-list-action">
+      <md-button class="md-icon-button md-small md-list-action" disabled>
         <md-icon class="md-primary">edit</md-icon>
       </md-button>
       <md-button class="md-icon-button md-small md-list-action" @click="deleteTask(task._id)">
