@@ -1,0 +1,40 @@
+// create a user
+
+//JOHN DOE 5debeda81c51afd731f72494
+axios.post('/user', {name: 'john', surname: 'doe', position: 'Frontend developer', projects:[], tasks:[]})
+
+//JANE SMITH 5debedc01c51afd731f72495
+axios.post('/user', {name: 'jane', surname: 'smith', position: 'Backend developer', projects:[], tasks:[]})
+
+//LINDA LEE 5debedd01c51afd731f72496
+axios.post('/user', {name: 'linda', surname: 'lee', position: 'Project Manager', projects:[], tasks:[]})
+
+// Project: Automation of Tasks 5debede11c51afd731f72498
+axios.post('/project', {name: 'Automation of Tasks', users: [], sprints:[]});
+
+// Project: Prepare presentations 5debedf21c51afd731f7249a
+axios.post('/project', {name: 'Prepare presentations', users: [], sprints:[]});
+
+// Sprint 1 5debeefb1c51afd731f7249b
+axios.post('/project/5debede11c51afd731f72498/sprint', {name: 'Sprint 1', deadline: new Date(), tasks:[]});
+
+// Sprint 2 5debef0c1c51afd731f7249d
+axios.post('/project/5debede11c51afd731f72498/sprint', {name: 'Sprint 2', deadline: new Date(), tasks:[]});
+
+//task test automation - backlog 5debf1521c51afd731f7249f
+axios.post('project/5debedf21c51afd731f7249a/backlog/task', {description: 'Test Automation', type:'feature', note:[],comments:[], users:[],status:'to do'});
+
+//task Fix header - sprint 5debf1631c51afd731f724a1
+axios.post('/sprint/5debeefb1c51afd731f7249b/task', {description: 'Fix header', type:'bug', note:[],comments:[], users:[],status:'to do'});
+
+//task Github OAuth Login -sprint 5debf1751c51afd731f724a3
+axios.post('/sprint/5debeefb1c51afd731f7249b/task', {description: 'Github OAuth Login', type:'feature', note:[],comments:[], users:[],status:'to do'});
+
+//task Deploy to Heroku 5debf1871c51afd731f724a5
+axios.post('/sprint/5debef0c1c51afd731f7249d/task', {description: 'Deploy to Heroku', type:'feature', note:[],comments:[], users:[],status:'to do'});
+
+//task write tests 5debf1981c51afd731f724a7
+axios.post('/user/5debeda81c51afd731f72494/task', {description: 'write tests', type:'tests', note:[],comments:[], users:[],status:'to do'});
+
+//task Update development tools 5debf1a71c51afd731f724a9
+axios.post('/user/5debedc01c51afd731f72495/task', {description: 'Update development tools', type:'bug', note:[],comments:[], users:[],status:'to do'});
