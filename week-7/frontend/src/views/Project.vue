@@ -6,7 +6,7 @@
         <span v-if="project.backlog.tasks.length > 0">
           <draggable
             group="all-tasks"
-            class="draggable-list"
+            class="draggable-list tasks-container"
             ghost-class="moving-card"
             filter=".action-button"
             :list="project.backlog.tasks"
@@ -26,7 +26,7 @@
           <HeaderCard :backlog="sprint"> </HeaderCard>
           <draggable
             group="all-tasks"
-            class="draggable-list"
+            class="draggable-list tasks-container"
             ghost-class="moving-card"
             filter=".action-button"
             :list="sprint.tasks"
@@ -100,5 +100,9 @@ export default {
   display: flex;
   justify-content: center;
   align-content: center;
+}
+.tasks-container {
+  display: flex;
+  flex-direction: column;
 }
 </style>
