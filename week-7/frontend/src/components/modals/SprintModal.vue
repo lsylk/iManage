@@ -31,8 +31,8 @@
       </md-dialog-actions>
     </md-dialog>
 
-    <md-button title="Add new sprint" aria-label="Add new sprint" @click="showDialog = true">
-      <md-icon>ballot</md-icon> Add sprint
+    <md-button title="Add new sprint" aria-label="Add new sprint" class="md-fab md-mini" @click="showDialog = true">
+      <md-icon>add</md-icon>
     </md-button>
   </div>
 </template>
