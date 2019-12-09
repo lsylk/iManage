@@ -61,6 +61,7 @@ export default {
   border-top: none;
 }
 .profileContent img {
+  width: 12%;
   border-radius: 50%;
   position: relative;
   top: -65px;
