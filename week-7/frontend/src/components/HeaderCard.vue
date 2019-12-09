@@ -14,6 +14,17 @@
           <div v-if="backlog.name !== 'Backlog'" class="md-subhead">Deadline: {{ backlog.deadline }}</div>
         </md-card-header>
       </md-card-area>
+      <md-card-actions md-alignment="right">
+        <md-button title="Edit Sprint" arial-label="Edit Sprint" v-if="backlog.name !== 'Backlog'" class="md-icon-button md-small md-list-action" disabled>>
+          <md-icon class="md-primary">edit</md-icon>
+        </md-button>
+        <md-button title="Delete Sprint" arial-label="Delete Sprint" v-if="backlog.name !== 'Backlog'" class="md-icon-button md-small md-list-action">
+          <md-icon class="md-primary">delete</md-icon>
+        </md-button>
+        <md-button title="Remove all tasks" arial-label="Remove all tasks" class="md-icon-button md-small md-list-action">
+          <md-icon class="md-primary">delete_sweep</md-icon>
+        </md-button>
+      </md-card-actions>
     </md-card>
   </div>
 </template>

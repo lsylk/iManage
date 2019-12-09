@@ -5,7 +5,7 @@
         <md-card-media>
           <img :src="`https://picsum.photos/320/53?random=${item._id}`" alt="Random cover image for project card" />
           <div class="action-buttons">
-            <md-button title="Edit Project" arial-label="Edit Project" class="md-icon-button md-small">
+            <md-button title="Edit Project" arial-label="Edit Project" class="md-icon-button md-small" disabled>
               <md-icon>edit</md-icon>
             </md-button>
             <md-button
