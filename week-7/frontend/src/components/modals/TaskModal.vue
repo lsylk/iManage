@@ -184,4 +184,8 @@ form {
     margin-top: 15px !important;
   }
 }
+
+.task-options.md-field:after {
+  height: 0px;
+}
 </style>
