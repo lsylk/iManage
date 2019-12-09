@@ -4,7 +4,7 @@
       <div
         v-for="project in projects"
         :key="project._id"
-        @click="
+        @click.self="
           goToProject(project);
           fetchProject(project._id);
         "

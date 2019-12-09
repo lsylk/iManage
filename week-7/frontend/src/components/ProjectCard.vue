@@ -5,10 +5,15 @@
         <md-card-media>
           <img :src="`https://picsum.photos/320/53?random=${item._id}`" alt="Random cover image for project card" />
           <div class="action-buttons">
-            <md-button class="md-icon-button md-small">
+            <md-button title="Edit Project" arial-label="Edit Project" class="md-icon-button md-small">
               <md-icon>edit</md-icon>
             </md-button>
-            <md-button class="md-icon-button md-small">
+            <md-button
+              title="Delete Project"
+              arial-label="Delete Project"
+              class="md-icon-button md-small"
+              @click.prevent="deleteProject(item._id)"
+            >
               <md-icon>delete</md-icon>
             </md-button>
           </div>
@@ -17,8 +22,8 @@
         <md-card-header>
           <div class="md-title">{{ item.name }}</div>
           <div class="md-subhead">
-            <span>Sprints: {{ item.sprints.length || 0 }}</span>
-            <span>Tasks in Backlog: {{ item.backlog.tasks.length || 0 }}</span>
+            <span>Tasks in Backlog: {{ countTasksInBacklog }}</span>
+            <span>Sprints: {{ countSprints }}</span>
           </div>
         </md-card-header>
 
@@ -26,7 +31,7 @@
           {{ item.description }}
         </md-card-content>
       </md-card-area>
-      <md-card-actions md-alignment="left" v-if="item.users.length > 0">
+      <md-card-actions md-alignment="left" v-if="item.users && item.users.length > 0">
         <span v-for="(user, index) in item.users" :key="index">
           <md-avatar class="md-avatar-icon md-small  md-list-action">{{ formatUserName(user) }}</md-avatar>
         </span>
@@ -36,6 +41,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'ProjectCard',
   props: {
@@ -49,11 +56,30 @@ export default {
       }),
     },
   },
-  computed: {},
+  computed: {
+    countTasksInBacklog() {
+      if (this.item.backlog && this.item.backlog.tasks && this.item.backlog.tasks.length) {
+        return this.item.sprints.length;
+      } else {
+        return 0;
+      }
+    },
+    countSprints() {
+      if (this.item.sprints && this.item.sprints.length) {
+        return this.item.sprints.length;
+      } else {
+        return 0;
+      }
+    },
+  },
 
   methods: {
+    ...mapActions({ deleteProject: 'project/deleteProject' }),
+
     formatUserName(user) {
-      return `${user.name[0].toUpperCase()}${user.surname[0].toUpperCase()}`;
+      if (user.name && user.surname) {
+        return `${user.name[0].toUpperCase()}${user.surname[0].toUpperCase()}`;
+      }
     },
   },
 };

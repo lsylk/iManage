@@ -44,6 +44,10 @@ export default {
       const sprintIndex = state.item.sprints.findIndex(sprint => sprint._id === sprintId);
       state.item.sprints[sprintIndex].tasks = state.item.sprints[sprintIndex].tasks.filter(task => task._id !== id);
     },
+
+    DELETE_PROJECT(state, id) {
+      state.items = state.items.filter(item => item._id !== id);
+    },
   },
 
   actions: {
@@ -88,6 +92,11 @@ export default {
     async deleteSprintTask({ commit }, { sprintId, id }) {
       await axios.delete(`http://localhost:3000/sprint/${sprintId}/task/${id}`);
       commit('DELETE_SPRINT_TASK', { sprintId, id });
+    },
+
+    async deleteProject({ commit }, id) {
+      await axios.delete(`http://localhost:3000/project/${id}`);
+      commit('DELETE_PROJECT', id);
     },
   },
 };
