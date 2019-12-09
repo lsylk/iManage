@@ -6,7 +6,17 @@
           <span
             ><b>Status: {{ task.status }}</b></span
           >
-          <md-badge class="md-square" :md-content="task.type" />
+          <md-badge
+            class="md-square"
+            :class="
+              task.type.toLowerCase() === 'bug'
+                ? 'bug-badge'
+                : task.type.toLowerCase() === 'feature'
+                ? 'feature-badge'
+                : 'test-badge'
+            "
+            :md-content="task.type"
+          />
         </div>
       </md-card-header>
 
@@ -113,5 +123,15 @@ export default {
   justify-content: space-around;
   align-items: center;
   flex: auto;
+}
+
+.feature-badge {
+  background-color: #eaa054 !important;
+}
+.bug-badge {
+  background-color: #ff5252 !important;
+}
+.test-badge {
+  background-color: rgb(52, 174, 202) !important;
 }
 </style>
