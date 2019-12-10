@@ -63,7 +63,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions({ addProject: 'project/addProject' }),
+    ...mapActions({ addProjectToUser: 'user/addProjectToUser', addProject: 'project/addProject' }),
     getValidationClass(fieldName) {
       const field = this.$v.form[fieldName];
 
@@ -80,7 +80,11 @@ export default {
     },
     async saveProject() {
       this.sending = true;
+      if (this.$route.name === 'myProjects') {
+        await this.addProjectToUser(this.form);
+      } else {
       await this.addProject(this.form);
+      }
       this.projectSaved = true;
       this.sending = false;
       this.clearForm();
