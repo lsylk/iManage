@@ -6,7 +6,7 @@ services:
       context: backend
       dockerfile: Dockerfile
     environment:
-      MONGODB_CONNECTION_STRING: "mongodb://mongodb/wtm"
+      MONGODB_CONNECTION_STRING: "mongodb://localhost:27017/wtm"
       PORT: "3000"
     ports:
       - 3000:3000
