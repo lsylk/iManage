@@ -24,11 +24,9 @@ export default {
     ADD_TASK_TO_USER(state, task) {
       state.item.tasks = state.item.tasks.concat(task);
     },
-  
+
     DELETE_USER_TASK(state, id) {
-      state.item.tasks = state.item.tasks.filter(task => {
-        task._id !== id;
-      });
+      state.item.tasks = state.item.tasks.filter(task => task._id.toString() !== id);
     },
   },
 
