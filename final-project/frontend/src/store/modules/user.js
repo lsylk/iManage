@@ -21,6 +21,10 @@ export default {
       state.items = state.items.concat(user);
     },
 
+    ADD_PROJECT_TO_USER(state, project) {
+      state.item.projects = state.item.projects.concat(project);
+    },
+
     ADD_TASK_TO_USER(state, task) {
       state.item.tasks = state.item.tasks.concat(task);
     },
@@ -44,6 +48,14 @@ export default {
     async addUser({ commit }, user) {
       const result = await axios.post(`http://localhost:3000/user`, user);
       commit('ADD_USER', result.data);
+    },
+
+    async addProjectToUser({commit}, project) {
+      //TO DO: use dispatch to call ADD_PROJECT action from project modules
+      const result = await axios.post(`http://localhost:3000/project`, project);
+      commit('ADD_PROJECT', result.data);
+      await axios.post(`http://localhost:3000/user/${this.state.user.item._id}/project/${result.data._id}`);
+      commit('ADD_PROJECT_TO_USER', result.data);
     },
 
     async addTaskToUSer({ commit }, task) {
