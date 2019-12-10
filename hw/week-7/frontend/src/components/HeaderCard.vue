@@ -34,8 +34,8 @@
           <md-icon class="md-primary">delete</md-icon>
         </md-button>
         <md-button
-          title="Remove all tasks"
-          arial-label="Remove all tasks"
+          title="Delete all tasks"
+          arial-label="Delete all tasks"
           class="md-icon-button md-small md-list-action"
           @click="deleteAllTasks()"
         >
