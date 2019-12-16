@@ -1,14 +1,70 @@
 # iManage
 
-[iManage]() is a task manager for agile software development.
+iManage is a task manager for agile software development.
 
-It includes a [Backend]() and [Frontend]() README.md
+**Technology used:** 
+- **Backend:** Node.js, Express.js, MongoDB, Mongoose, Ava and NYC.
+- **Frontend:** Javascript, VueJS, Vuex, VueRouter, VueDraggable, Vue Material, Jest, Cypress.
 
-This is the final project created during the [JS Crash Course](http://wtmberlin.com/javascript-crash-course/) hosted by [Women Techmakers, Berlin.](http://wtmberlin.com/)
+## **Backend:**
 
+### **API Endpoints**
 
-## Organization
+### *User Routes*
+- **Fetch user by id**
+ `GET:`
+	 ```
+	/user/:userId
+	```
+- **Fetch all users**
+ `GET:`
+	 ```
+	/user/show/all
+	```
+- **Fetch all projects from user**
+ `GET:`
+	 ```
+	/user/:userId/projects/all
+	```
 
-The [hw](https://github.com/lsylk/JS-crashCourse-WTM/tree/master/hw) folder contains all the homework done during the course.  
-
-The [final-project](https://github.com/lsylk/JS-crashCourse-WTM/tree/master/final-project) folder contains the most up to date changes including docker file, features, bug fixing, and testing.
+- **Fetch all tasks from user**
+ `GET:`
+	 ```
+	/user/:userId/projects/all
+	```
+- **Create new user**
+ `POST:`
+	 ```
+	/user
+	```
+- **Add project to user**
+ `POST:`
+	 ```
+	/user/:userId/project/:projectId
+	```
+- **Create new task for user**
+ `POST:`
+	 ```
+	/user/:userId/task
+	```
+- **Update user**
+ `PUT:`
+	 ```
+	/user/:userId
+	```
+- **Delete user**
+ `DELETE:`
+	 ```
+	/user/:userId
+	```
+- **Delete task from user**
+ `DELETE:`
+	 ```
+	/user/:userId/task/:taskId
+	```
+### *Project Routes*
+- **Fetch user by id**
+ `GET:`
+	 ```
+	/user/:userId
+	```
