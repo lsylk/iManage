@@ -120,5 +120,16 @@ To get the Node server running locally:
 ### **Commands to run tests**
 
 - `npm run test` to run AVA, which is a test runner for Node.js.
-- `npm run test-coverage` to get the test coverage with NYC in the CLI
-- `nyc report --reporter=html` to get the test coverage report
+- `npm run test-coverage` to get the test coverage with NYC in the CLI.
+- `nyc report --reporter=html` to get the test coverage report.
+
+## **Getting started in the Frontend:**
+
+- `npm install` to install all the dependencies.
+- `npm run serve` to start running the application locally in your machine.
+- View in browser at http://localhost:8080 (if your 8080 port is occupied, vue-cli-service will automatically run it in a different port).
+
+### **Commands to run tests**
+
+- `npm run test:e2e` to run cypress, which is an end to end testing framework.
+- `npm run test:unit` to run unit tests written in jest.
