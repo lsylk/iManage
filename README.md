@@ -7,7 +7,20 @@ iManage is a task manager for agile software development.
 - **Backend:** Node.js, Express.js, MongoDB, Mongoose, Ava and NYC.
 - **Frontend:** Javascript, VueJS, Vuex, VueRouter, VueDraggable, Vue Material, Jest, Cypress.
 
-## **Backend:**
+## Requirements
+
+This application relies heavily on ES6 Proxies, and so either a recent version of Node or the browsers will be required.
+
+## **Getting started in the Backend:**
+
+To get the Node server running locally:
+
+- Clone this repo.
+- Set up MongoDB locally. [Link](https://www.mongodb.com/download-center?jmp=nav#community) to get started (Click on 'Community Server' Tab to download).
+  > If you have homebrew in your machine, use the following command in your Terminal: `brew install mongodb`. And then activate it with the command: `brew services start mongodb`.
+- `npm install` to install all the dependencies.
+- `nodemon index.js` to start the local server and database connection. (You will see logged in your console 'Server listening' and 'connected').
+- View in browser at http://localhost:3000
 
 ### **API Endpoints**
 
