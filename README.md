@@ -68,3 +68,50 @@ iManage is a task manager for agile software development.
 	 ```
 	/user/:userId
 	```
+
+### *Project Routes*
+- **Fetch project by id**
+ `GET:`
+	 ```
+	/project/:projectId
+	```
+- **Fetch all projects**
+ `GET:`
+	 ```
+	/project/show/all
+	```
+- **Create new project**
+ `POST:`
+	 ```
+	/project
+	```
+- **Create new sprint for a project**
+ `POST:`
+	 ```
+	/project/:projectId/sprint
+	```
+- **Add a task in project's backlog**
+ `POST:`
+	 ```
+	/project/:projectId/backlog/task
+	```
+- **Update project**
+ `PUT:`
+	 ```
+	/project/:projectId
+	```
+- **Delete project**
+ `DELETE:`
+	 ```
+	/project/:projectId
+	 ```
+- **Clear project's backlog**
+ `DELETE:`
+	 ```
+	/project/:projectId/backlog
+	 ```
+- **Delete task from project's backlog**
+ `DELETE:`
+	 ```
+	/project/:projectId/backlog/task/:taskId
+	 ``` 
