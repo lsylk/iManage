@@ -11,7 +11,7 @@ iManage is a task manager for agile software development.
 
 This application relies heavily on ES6 Proxies, and so either a recent version of Node or the browsers will be required.
 
-## **Getting started in the Backend:**
+## **🗄 Getting started in the Backend:**
 
 To get the Node server running locally:
 
@@ -123,7 +123,7 @@ To get the Node server running locally:
 - `npm run test-coverage` to get the test coverage with NYC in the CLI.
 - `nyc report --reporter=html` to get the test coverage report.
 
-## **Getting started in the Frontend:**
+## **🖥 Getting started in the Frontend:**
 
 - `npm install` to install all the dependencies.
 - `npm run serve` to start running the application locally in your machine.
