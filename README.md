@@ -2,7 +2,8 @@
 
 iManage is a task manager for agile software development.
 
-**Technology used:** 
+**Technology used:**
+
 - **Backend:** Node.js, Express.js, MongoDB, Mongoose, Ava and NYC.
 - **Frontend:** Javascript, VueJS, Vuex, VueRouter, VueDraggable, Vue Material, Jest, Cypress.
 
@@ -10,108 +11,87 @@ iManage is a task manager for agile software development.
 
 ### **API Endpoints**
 
-### *User Routes*
+### _User Routes_
+
 - **Fetch user by id**
- `GET:`
-	 ```
-	/user/:userId
-	```
+  `GET:`
+  `/user/:userId`
 - **Fetch all users**
- `GET:`
-	 ```
-	/user/show/all
-	```
+  `GET:`
+  `/user/show/all`
 - **Fetch all projects from user**
- `GET:`
-	 ```
-	/user/:userId/projects/all
-	```
-
+  `GET:`
+  `/user/:userId/projects/all`
 - **Fetch all tasks from user**
- `GET:`
-	 ```
-	/user/:userId/projects/all
-	```
+  `GET:`
+  `/user/:userId/projects/all`
 - **Create new user**
- `POST:`
-	 ```
-	/user
-	```
+  `POST:`
+  `/user`
 - **Add project to user**
- `POST:`
-	 ```
-	/user/:userId/project/:projectId
-	```
+  `POST:`
+  `/user/:userId/project/:projectId`
 - **Create new task for user**
- `POST:`
-	 ```
-	/user/:userId/task
-	```
+  `POST:`
+  `/user/:userId/task`
 - **Update user**
- `PUT:`
-	 ```
-	/user/:userId
-	```
+  `PUT:`
+  `/user/:userId`
 - **Delete user**
- `DELETE:`
-	 ```
-	/user/:userId
-	```
+  `DELETE:`
+  `/user/:userId`
 - **Delete task from user**
- `DELETE:`
-	 ```
-	/user/:userId/task/:taskId
-	```
-### *Project Routes*
-- **Fetch user by id**
- `GET:`
-	 ```
-	/user/:userId
-	```
+  `DELETE:`
+  `/user/:userId/task/:taskId`
 
-### *Project Routes*
+
+### _Project Routes_
+
 - **Fetch project by id**
- `GET:`
-	 ```
-	/project/:projectId
-	```
+  `GET:`
+  `/project/:projectId`
 - **Fetch all projects**
- `GET:`
-	 ```
-	/project/show/all
-	```
+  `GET:`
+  `/project/show/all`
 - **Create new project**
- `POST:`
-	 ```
-	/project
-	```
+  `POST:`
+  `/project`
 - **Create new sprint for a project**
- `POST:`
-	 ```
-	/project/:projectId/sprint
-	```
+  `POST:`
+  `/project/:projectId/sprint`
 - **Add a task in project's backlog**
- `POST:`
-	 ```
-	/project/:projectId/backlog/task
-	```
+  `POST:`
+  `/project/:projectId/backlog/task`
 - **Update project**
- `PUT:`
-	 ```
-	/project/:projectId
-	```
+  `PUT:`
+  `/project/:projectId`
 - **Delete project**
- `DELETE:`
-	 ```
-	/project/:projectId
-	 ```
+  `DELETE:`
+  `/project/:projectId`
 - **Clear project's backlog**
- `DELETE:`
-	 ```
-	/project/:projectId/backlog
-	 ```
+  `DELETE:`
+  `/project/:projectId/backlog`
 - **Delete task from project's backlog**
- `DELETE:`
-	 ```
-	/project/:projectId/backlog/task/:taskId
-	 ``` 
+  `DELETE:`
+  `/project/:projectId/backlog/task/:taskId`
+
+### _Sprint Routes_
+
+- **Fetch sprint by id**
+  `GET:`
+  `/sprint/:sprintId`
+- **Update sprint**
+  `PUT:`
+  `/sprint/:sprintId`
+- **Delete sprint**
+  `DELETE:`
+  `/sprint/:sprintId`
+- **Add task to sprint**
+  `POST:`
+  `/sprint/:sprintId/task`
+- **Delete task from sprint**
+  `DELETE:`
+  `/sprint/:sprintId/task/:taskId`
+- **Clear all tasks from a sprint**
+  `DELETE:`
+  `/sprint/:sprintId/tasks`
