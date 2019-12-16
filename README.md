@@ -15,7 +15,6 @@ This application relies heavily on ES6 Proxies, and so either a recent version o
 
 To get the Node server running locally:
 
-- Clone this repo.
 - Set up MongoDB locally. [Link](https://www.mongodb.com/download-center?jmp=nav#community) to get started (Click on 'Community Server' Tab to download).
   > If you have homebrew in your machine, use the following command in your Terminal: `brew install mongodb`. And then activate it with the command: `brew services start mongodb`.
 - `npm install` to install all the dependencies.
