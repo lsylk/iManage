@@ -44,7 +44,6 @@ iManage is a task manager for agile software development.
   `DELETE:`
   `/user/:userId/task/:taskId`
 
-
 ### _Project Routes_
 
 - **Fetch project by id**
@@ -95,3 +94,12 @@ iManage is a task manager for agile software development.
 - **Clear all tasks from a sprint**
   `DELETE:`
   `/sprint/:sprintId/tasks`
+
+### _Task Routes_
+
+- **Fetch task by id**
+  `GET:`
+  `/task/:taskId`
+- **Update task**
+  `PUT:`
+  `/task/:taskId`
