@@ -116,3 +116,9 @@ To get the Node server running locally:
 - **Update task**
   `PUT:`
   `/task/:taskId`
+
+### **Commands to run tests**
+
+- `npm run test` to run AVA, which is a test runner for Node.js.
+- `npm run test-coverage` to get the test coverage with NYC in the CLI
+- `nyc report --reporter=html` to get the test coverage report
