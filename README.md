@@ -146,3 +146,4 @@ To get the Node server running locally:
 
 - Add more tests on backend and frontend.
 - Enable to update different entities in the frontend.
+- Add user login.
