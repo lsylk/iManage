@@ -132,3 +132,7 @@ To get the Node server running locally:
 
 - `npm run test:e2e` to run cypress, which is an end to end testing framework.
 - `npm run test:unit` to run unit tests written in jest.
+
+## **To Do:**
+- Add more tests on backend and frontend.
+- Enable to update different entities in the frontend.
