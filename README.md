@@ -2,6 +2,15 @@
 
 iManage is a task manager for agile software development.
 
+- The user has a view to check out their tasks and projects and see all the existing projects in the team.
+  ![](/frontend/src/assets/iManage-part1.gif)
+
+- A project has a backlog and it can have multiple sprints with multiple tasks.
+  ![](/frontend/src/assets/iManage-part2.gif)
+
+- The tasks are dragable between backlog and sprints. The backlog and sprints can clear all the tasks at once. The Sprints are also deletable.
+  ![](/frontend/src/assets/iManage-part3.gif)
+
 **Technology used:**
 
 - **Backend:** Node.js, Express.js, MongoDB, Mongoose, Ava and NYC.
@@ -9,7 +18,7 @@ iManage is a task manager for agile software development.
 
 ## Requirements
 
-This application relies heavily on ES6 Proxies, and so either a recent version of Node or the browsers will be required.
+This application relies heavily on ES6, and so either a recent version of Node or the browsers will be required.
 
 ## **🗄 Getting started in the Backend:**
 
@@ -134,5 +143,6 @@ To get the Node server running locally:
 - `npm run test:unit` to run unit tests written in jest.
 
 ## **To Do:**
+
 - Add more tests on backend and frontend.
 - Enable to update different entities in the frontend.
