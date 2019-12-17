@@ -1,6 +1,7 @@
 # iManage
 
 iManage is a task manager for agile software development.
+![iManage](final-project/frontend/assets/iManageDemo.mp4)
 
 **Technology used:**
 
